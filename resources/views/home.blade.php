@@ -26,8 +26,8 @@
         </div>
     </section>
 
-    <section class="relative z-10 -mt-6 rounded-t-3xl bg-damson-panel px-4 pb-16 pt-12 shadow-[0_-8px_40px_-12px_rgba(0,68,43,0.07)] sm:px-6 sm:pb-20 sm:pt-14 lg:px-8">
-        <div class="mx-auto max-w-6xl">
+    <section class="relative z-10 -mt-6 px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-14 lg:px-8">
+        <div class="store-surface mx-auto max-w-6xl px-6 py-10 sm:px-8 sm:py-12">
             <div>
                 <h2 class="damson-section-title">Mission &amp; vision</h2>
                 <p class="damson-prose mt-3 max-w-2xl text-base">Why we exist — and the future we&rsquo;re building with growers.</p>
@@ -71,7 +71,7 @@
                     <ul class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
                         @foreach ($latestProducts as $product)
                             <li>
-                                <article class="dashboard-card flex h-full flex-col overflow-hidden transition hover:-translate-y-0.5 hover:shadow-lg">
+                                <article class="store-card flex h-full flex-col">
                                     <a href="{{ route('store.show', $product) }}" class="relative block aspect-square overflow-hidden bg-stone-100">
                                         @if ($product->image_path)
                                             <img src="{{ Storage::url($product->image_path) }}" alt="" class="h-full w-full object-cover transition duration-300 hover:scale-[1.03]" width="480" height="480">

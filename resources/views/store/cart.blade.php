@@ -19,7 +19,7 @@
         </div>
 
         @if ($lines === [])
-            <div class="dashboard-card mt-10 p-10 text-center text-sm text-stone-600">
+            <div class="store-panel mt-10 p-10 text-center text-sm text-stone-600">
                 <p>Your cart is empty.</p>
                 <a href="{{ route('store.index') }}" class="mt-4 inline-block text-sm font-semibold text-damson-orange hover:text-damson-orange-hover">Continue shopping</a>
             </div>

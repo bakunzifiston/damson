@@ -37,7 +37,7 @@
     <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <form action="{{ route('store.index') }}" method="get" id="store-filter-form" class="lg:grid lg:grid-cols-[min(280px,100%)_1fr] lg:items-start lg:gap-10 xl:gap-12">
             {{-- Sidebar filters --}}
-            <aside class="dashboard-card sticky top-24 mb-10 p-6 lg:mb-0">
+            <aside class="store-panel sticky top-24 mb-10 p-6 lg:mb-0">
                 <h2 class="font-display text-lg font-semibold text-damson-orange">Filter products</h2>
 
                 <div class="mt-6">
@@ -126,7 +126,7 @@
                 <ul class="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                     @forelse ($products as $product)
                         <li class="group">
-                            <article class="dashboard-card flex h-full flex-col overflow-hidden transition hover:-translate-y-0.5 hover:shadow-lg">
+                            <article class="store-card flex h-full flex-col">
                                 <div class="relative aspect-square overflow-hidden bg-stone-100">
                                     @if ($product->image_path)
                                         <img src="{{ Storage::url($product->image_path) }}" alt="" class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]" width="600" height="600">

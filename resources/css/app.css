@@ -96,6 +96,20 @@
         @apply rounded-2xl border border-stone-200/90 bg-white shadow-[0_2px_8px_-2px_rgba(0,68,43,0.08),0_1px_2px_rgba(0,68,43,0.04)];
     }
 
+    /* Public storefront surfaces (lighter than staff dashboard cards) */
+    .store-surface {
+        @apply rounded-3xl border border-stone-200/70 bg-white;
+    }
+
+    .store-card {
+        @apply overflow-hidden rounded-2xl border border-stone-200/80 bg-white transition;
+        @apply shadow-[0_8px_28px_-20px_rgba(0,0,0,0.35)] hover:-translate-y-0.5 hover:shadow-[0_20px_44px_-28px_rgba(0,0,0,0.45)];
+    }
+
+    .store-panel {
+        @apply rounded-2xl border border-stone-200/70 bg-white shadow-[0_6px_20px_-16px_rgba(0,0,0,0.35)];
+    }
+
     .damson-markdown h1,
     .damson-markdown h2,
     .damson-markdown h3 {

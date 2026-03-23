@@ -12,7 +12,7 @@
         <h1 class="mt-1 font-display text-2xl font-semibold text-brand-950 sm:text-3xl">Checkout</h1>
         <p class="mt-2 text-sm text-stone-600">Enter your details and shipping address. Totals are subtotal only (tax or delivery can be added later).</p>
 
-        <div class="dashboard-card mt-8 p-6">
+        <div class="store-panel mt-8 p-6">
             <h2 class="font-display text-sm font-semibold uppercase tracking-wide text-stone-500">Order summary</h2>
             <ul class="mt-4 divide-y divide-stone-100 text-sm">
                 @foreach ($lines as $line)
@@ -31,7 +31,7 @@
             </p>
         </div>
 
-        <form action="{{ route('store.checkout.store') }}" method="post" class="dashboard-card mt-8 space-y-5 p-6">
+        <form action="{{ route('store.checkout.store') }}" method="post" class="store-panel mt-8 space-y-5 p-6">
             @csrf
             <div>
                 <label for="customer_name" class="block text-xs font-semibold uppercase tracking-wide text-stone-500">Full name</label>

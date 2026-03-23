@@ -1,0 +1,143 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+/*
+ * DAMSON brand colors (official logo)
+ * — Primary green ring / mushroom outline: #00442B
+ * — Accent orange (banner / slogan):       #E58A00
+ * — Accent yellow (stars):                 #F9E400
+ */
+@theme {
+    --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Fraunces', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+
+    /* Green scale anchored at logo #00442B */
+    --color-brand-50: #ecf7f3;
+    --color-brand-100: #d4ebe3;
+    --color-brand-200: #a8d4c4;
+    --color-brand-300: #7dbda5;
+    --color-brand-400: #4f9f82;
+    --color-brand-500: #2d8565;
+    --color-brand-600: #1a6b4f;
+    --color-brand-700: #0d553d;
+    --color-brand-800: #064530;
+    --color-brand-900: #00442b;
+    --color-brand-950: #002818;
+
+    /* Logo accents (explicit names) */
+    --color-damson-orange: #e58a00;
+    --color-damson-orange-hover: #c97600;
+    --color-damson-orange-muted: #fff4e6;
+    --color-damson-yellow: #f9e400;
+    --color-damson-yellow-hover: #ddd000;
+
+    /* Surfaces — reduce stark white sitewide */
+    --color-damson-page: #d5ebe2;
+    --color-damson-panel: #eef6f3;
+}
+
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection {
+        background-color: color-mix(in srgb, var(--color-damson-yellow) 45%, transparent);
+        color: var(--color-brand-950);
+    }
+}
+
+@layer components {
+    .damson-btn {
+        @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium transition;
+        @apply bg-brand-900 text-white shadow-sm hover:bg-brand-950 active:bg-brand-950;
+        @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-damson-orange focus-visible:ring-offset-2;
+    }
+
+    .damson-btn-outline {
+        @apply inline-flex items-center justify-center rounded-lg border-2 border-brand-900 bg-damson-panel px-5 py-2.5 text-sm font-medium text-brand-900 transition;
+        @apply hover:bg-brand-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-damson-orange focus-visible:ring-offset-2;
+    }
+
+    .damson-btn-accent {
+        @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition;
+        @apply bg-damson-orange text-white shadow-sm hover:bg-damson-orange-hover;
+        @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-damson-yellow focus-visible:ring-offset-2;
+    }
+
+    .damson-input {
+        @apply mt-1 w-full rounded-lg border-brand-200/80 bg-damson-panel shadow-sm transition;
+        @apply focus:border-brand-900 focus:ring-2 focus:ring-brand-900/15 focus:outline-none;
+    }
+
+    .damson-section-title {
+        @apply font-display text-2xl font-semibold tracking-tight text-brand-950 sm:text-3xl;
+    }
+
+    .damson-prose {
+        @apply text-stone-600 leading-relaxed;
+    }
+
+    .damson-page-hero {
+        @apply border-b border-brand-900/10 bg-damson-panel/55;
+    }
+
+    /* Staff dashboard (BUCHAPRO-style shell, DAMSON palette) */
+    .dashboard-canvas {
+        @apply min-h-screen bg-stone-100;
+    }
+
+    .dashboard-card {
+        @apply rounded-2xl border border-stone-200/90 bg-white shadow-[0_2px_8px_-2px_rgba(0,68,43,0.08),0_1px_2px_rgba(0,68,43,0.04)];
+    }
+
+    .damson-markdown h1,
+    .damson-markdown h2,
+    .damson-markdown h3 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        color: var(--color-brand-950);
+        letter-spacing: -0.02em;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+    .damson-markdown h1 {
+        font-size: 1.875rem;
+    }
+    .damson-markdown h2 {
+        font-size: 1.5rem;
+    }
+    .damson-markdown h3 {
+        font-size: 1.25rem;
+    }
+    .damson-markdown p {
+        margin-bottom: 1rem;
+        line-height: 1.7;
+    }
+    .damson-markdown ul {
+        list-style-type: disc;
+        padding-left: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    .damson-markdown li {
+        margin-bottom: 0.35rem;
+    }
+    .damson-markdown a {
+        color: var(--color-damson-orange-hover);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-color: color-mix(in srgb, var(--color-damson-orange) 50%, transparent);
+    }
+    .damson-markdown a:hover {
+        color: var(--color-damson-orange);
+    }
+    .damson-markdown strong {
+        font-weight: 600;
+        color: var(--color-brand-950);
+    }
+}

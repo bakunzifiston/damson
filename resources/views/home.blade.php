@@ -52,21 +52,21 @@
                 </div>
             </div>
 
-            @if ($latestProducts->isNotEmpty())
-                @php
-                    $sym = config('app.currency_symbol', '$');
-                @endphp
-                <div class="mt-16 border-t border-brand-900/10 pt-16">
-                    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                        <div>
-                            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-damson-orange">Store</p>
-                            <h2 class="damson-section-title mt-2">Latest products</h2>
-                            <p class="damson-prose mt-2 max-w-xl text-base text-stone-600">
-                                The newest items in our catalog — added most recently.
-                            </p>
-                        </div>
-                        <a href="{{ route('store.index') }}" class="shrink-0 text-sm font-semibold text-damson-orange hover:text-damson-orange-hover">Browse full store →</a>
+            @php
+                $sym = config('app.currency_symbol', '$');
+            @endphp
+            <div class="mt-16 border-t border-brand-900/10 pt-16">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-damson-orange">Store</p>
+                        <h2 class="damson-section-title mt-2">Latest products</h2>
+                        <p class="damson-prose mt-2 max-w-xl text-base text-stone-600">
+                            The newest items in our catalog — added most recently.
+                        </p>
                     </div>
+                    <a href="{{ route('store.index') }}" class="shrink-0 text-sm font-semibold text-damson-orange hover:text-damson-orange-hover">Browse full store →</a>
+                </div>
+                @if ($latestProducts->isNotEmpty())
                     <ul class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
                         @foreach ($latestProducts as $product)
                             <li>
@@ -93,8 +93,12 @@
                             </li>
                         @endforeach
                     </ul>
-                </div>
-            @endif
+                @else
+                    <div class="mt-8 rounded-2xl border border-dashed border-stone-300 bg-stone-50 px-6 py-10 text-center text-sm text-stone-600">
+                        No products are visible yet. Add products in the dashboard and set them as active.
+                    </div>
+                @endif
+            </div>
 
             <div class="mt-16 border-t border-brand-900/10 pt-16">
                 <div class="max-w-2xl">

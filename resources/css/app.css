@@ -36,9 +36,9 @@
     --color-damson-yellow: #f9e400;
     --color-damson-yellow-hover: #ddd000;
 
-    /* Surfaces — reduce stark white sitewide */
-    --color-damson-page: #d5ebe2;
-    --color-damson-panel: #eef6f3;
+    /* Surfaces */
+    --color-damson-page: #ffffff;
+    --color-damson-panel: #ffffff;
 }
 
 @layer base {
@@ -89,7 +89,7 @@
 
     /* Staff dashboard (BUCHAPRO-style shell, DAMSON palette) */
     .dashboard-canvas {
-        @apply min-h-screen bg-stone-100;
+        @apply min-h-screen bg-white;
     }
 
     .dashboard-card {

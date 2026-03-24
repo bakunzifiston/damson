@@ -5,7 +5,7 @@
 @section('content')
     <section class="relative flex min-h-[72vh] flex-col justify-end overflow-hidden sm:min-h-[78vh] sm:justify-center">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&amp;fit=crop&amp;w=2000&amp;q=85"
+            <img src="{{ asset('images/home-banner-mushroom.png') }}"
                  alt=""
                  class="h-full w-full scale-105 object-cover"
                  width="2000" height="1333" fetchpriority="high">
@@ -20,7 +20,6 @@
             </p>
             <div class="mt-8 flex flex-wrap gap-3">
                 <a href="{{ route('store.index') }}" class="damson-btn-accent">Shop</a>
-                <a href="{{ route('products') }}" class="inline-flex items-center justify-center rounded-lg border-2 border-damson-panel/90 bg-damson-panel/95 px-5 py-2.5 text-sm font-semibold text-brand-900 shadow-sm backdrop-blur-sm transition hover:bg-damson-panel">Products</a>
                 <a href="{{ route('contact') }}" class="rounded-lg px-5 py-2.5 text-sm font-medium text-damson-yellow underline decoration-damson-yellow/60 underline-offset-4 transition hover:decoration-damson-yellow">Contact</a>
             </div>
         </div>

@@ -29,11 +29,6 @@ class PageController extends Controller
         return view('about');
     }
 
-    public function products()
-    {
-        return view('products.index');
-    }
-
     public function formsHub()
     {
         return view('forms.hub');

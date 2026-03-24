@@ -19,7 +19,7 @@
                 <div>
                     <p class="text-xs font-semibold uppercase tracking-wider text-white/45">Site</p>
                     <ul class="mt-3 space-y-2.5 text-brand-100">
-                        <li><a href="{{ route('products') }}" class="transition hover:text-white">Products</a></li>
+                        <li><a href="{{ route('store.index') }}" class="transition hover:text-white">Store</a></li>
                         <li><a href="{{ route('learning.index') }}" class="transition hover:text-white">Learning</a></li>
                         <li><a href="{{ route('forms.hub') }}" class="transition hover:text-white">Forms</a></li>
                     </ul>

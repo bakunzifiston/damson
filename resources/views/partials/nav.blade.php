@@ -8,14 +8,8 @@
     $main = [
         $link('home', 'Home', 'home'),
         $link('about', 'About', 'about'),
-        $link('products', 'Products', 'products'),
         ['route' => 'learning.index', 'label' => 'Learning', 'active' => request()->is('learning*')],
         $link('store.index', 'Store', 'store.*'),
-        [
-            'route' => 'store.cart',
-            'label' => 'View cart',
-            'active' => request()->routeIs('store.cart', 'store.checkout', 'store.checkout.store', 'store.checkout.success'),
-        ],
         $link('success-stories', 'Stories', 'success-stories'),
         $link('contact', 'Contact', 'contact'),
     ];

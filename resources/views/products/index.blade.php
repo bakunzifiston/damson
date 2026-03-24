@@ -26,7 +26,7 @@
                     <p class="mt-6"><a href="{{ route('store.index') }}" class="text-sm font-medium text-stone-900 underline decoration-stone-300 underline-offset-4 hover:decoration-stone-900">Store</a></p>
                 </div>
                 <div class="order-1 lg:order-2 aspect-[4/3] overflow-hidden bg-brand-100/50">
-                    <img src="https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="h-full w-full object-cover" width="1200" height="900">
+                    <img src="{{ asset('images/african-mushroom.png') }}" alt="" class="h-full w-full object-cover" width="1200" height="900">
                 </div>
             </div>
         </section>
@@ -34,7 +34,7 @@
         <section id="spawn" class="scroll-mt-24">
             <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
                 <div class="aspect-[4/3] overflow-hidden bg-brand-100/50">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="h-full w-full object-cover" width="1200" height="900">
+                    <img src="{{ asset('images/african-mushroom.png') }}" alt="" class="h-full w-full object-cover" width="1200" height="900">
                 </div>
                 <div>
                     <h2 class="text-xl font-medium text-stone-900 sm:text-2xl">Spawn</h2>

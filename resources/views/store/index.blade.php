@@ -11,7 +11,7 @@
     {{-- Hero (shop style, DAMSON palette) --}}
     <section class="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-900 to-brand-950 text-white">
         <div class="absolute inset-y-0 right-0 hidden w-1/2 lg:block">
-            <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&amp;fit=crop&amp;w=1200&amp;q=80"
+            <img src="{{ asset('images/african-mushroom.png') }}"
                  alt=""
                  class="h-full w-full object-cover opacity-90"
                  width="1200" height="800">

@@ -21,7 +21,6 @@
             <div class="mt-8 flex flex-wrap gap-3">
                 <a href="{{ route('store.index') }}" class="damson-btn-accent">Shop Fresh Mushrooms</a>
                 <a href="{{ route('store.index') }}" class="inline-flex items-center justify-center rounded-lg border-2 border-damson-panel/90 bg-damson-panel/95 px-5 py-2.5 text-sm font-semibold text-brand-900 shadow-sm backdrop-blur-sm transition hover:bg-damson-panel">Buy Mushroom Tubes</a>
-                <a href="{{ route('learning.index') }}" class="rounded-lg border border-white/30 bg-white/10 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-white/20">Enroll in Training</a>
                 <a href="{{ route('contact') }}" class="rounded-lg px-5 py-2.5 text-sm font-medium text-damson-yellow underline decoration-damson-yellow/60 underline-offset-4 transition hover:decoration-damson-yellow">Contact Us</a>
             </div>
         </div>

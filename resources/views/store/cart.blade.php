@@ -34,7 +34,7 @@
                         <div class="flex min-w-0 flex-1 gap-4">
                             <a href="{{ route('store.show', $product) }}" class="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-stone-100 ring-1 ring-stone-200">
                                 @if ($product->image_path)
-                                    <img src="{{ '/storage/'.$product->image_path }}" alt="" class="h-full w-full object-cover" width="80" height="80">
+                                    <img src="{{ '/public/storage/'.$product->image_path }}" alt="" class="h-full w-full object-cover" width="80" height="80">
                                 @else
                                     <div class="flex h-full items-center justify-center text-[10px] text-stone-400">No image</div>
                                 @endif

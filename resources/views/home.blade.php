@@ -79,7 +79,7 @@
                                 <article class="store-card flex h-full flex-col">
                                     <a href="{{ route('store.show', $product) }}" class="relative block aspect-square overflow-hidden bg-stone-100">
                                         @if ($product->image_path)
-                                            <img src="{{ Storage::url($product->image_path) }}" alt="" class="h-full w-full object-cover transition duration-300 hover:scale-[1.03]" width="480" height="480">
+                                            <img src="{{ Storage::disk("public")->url($product->image_path) }}" alt="" class="h-full w-full object-cover transition duration-300 hover:scale-[1.03]" width="480" height="480">
                                         @else
                                             <div class="flex h-full items-center justify-center text-sm text-stone-400">No image</div>
                                         @endif

@@ -29,7 +29,7 @@
     <section class="relative z-10 -mt-6 px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-14 lg:px-8">
         <div class="store-surface mx-auto max-w-6xl px-6 py-10 sm:px-8 sm:py-12">
             <div>
-                <h2 class="damson-section-title">Welcome to Damson Mushroom Business Limited</h2>
+                <h2 class="damson-section-title">Damson Mushroom Business Limited</h2>
                 <p class="damson-prose mt-3 max-w-4xl text-base">
                     At Damson Mushroom Business Limited, we are more than just mushroom producers — we are a complete mushroom value chain solution provider. From producing high-quality mushrooms to supplying reliable mushroom spawn and offering hands-on training, we play a critical role in transforming agriculture and empowering communities across Rwanda.
                 </p>

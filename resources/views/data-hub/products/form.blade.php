@@ -25,7 +25,7 @@
                     @error('image')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                     @if ($mode === 'edit' && $product->image_path)
                         <p class="mt-2 text-xs text-stone-500">Current file is kept unless you choose a new image.</p>
-                        <img src="{{ Storage::disk("public")->url($product->image_path) }}" alt="" class="mt-2 h-24 w-24 rounded-lg object-cover ring-1 ring-stone-200">
+                        <img src="{{ '/storage/'.$product->image_path }}" alt="" class="mt-2 h-24 w-24 rounded-lg object-cover ring-1 ring-stone-200">
                     @endif
                 </div>
 

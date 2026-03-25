@@ -39,7 +39,7 @@
                             <tr class="hover:bg-brand-50/40">
                                 <td class="px-4 py-2">
                                     @if ($product->image_path)
-                                        <img src="{{ Storage::disk("public")->url($product->image_path) }}" alt="" class="h-12 w-12 rounded-lg object-cover ring-1 ring-stone-200" width="48" height="48">
+                                        <img src="{{ '/storage/'.$product->image_path }}" alt="" class="h-12 w-12 rounded-lg object-cover ring-1 ring-stone-200" width="48" height="48">
                                     @else
                                         <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-stone-100 text-[10px] text-stone-400">—</div>
                                     @endif

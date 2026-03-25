@@ -8,7 +8,7 @@
         <div class="mt-8 grid gap-10 lg:grid-cols-2">
             <div class="aspect-square bg-brand-100/50">
                 @if ($product->image_path)
-                    <img src="{{ Storage::disk("public")->url($product->image_path) }}" alt="" class="h-full w-full object-cover">
+                    <img src="{{ '/storage/'.$product->image_path }}" alt="" class="h-full w-full object-cover">
                 @else
                     <div class="flex h-full items-center justify-center text-sm text-stone-400">No image</div>
                 @endif

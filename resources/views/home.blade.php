@@ -28,18 +28,39 @@
 
     <section class="relative z-10 -mt-6 px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-14 lg:px-8">
         <div class="store-surface mx-auto max-w-6xl px-6 py-10 sm:px-8 sm:py-12">
-            <div>
-                <h2 class="damson-section-title">Damson Mushroom Business Limited</h2>
-                <p class="damson-prose mt-3 max-w-4xl text-base">
-                    At DAMSON MUSHROOM FARM LTD, we go beyond mushroom production — we deliver complete, innovative solutions across the entire mushroom value chain. From high-quality fresh and processed mushrooms to reliable spawn, organic compost, and smart farming technologies like DMMS, we support farmers at every stage.
-                </p>
-                <p class="damson-prose mt-3 max-w-4xl text-base">
-                    We combine practical expertise with modern agricultural innovation to make mushroom farming accessible, profitable, and sustainable. Whether you are a beginner or an experienced grower, we provide the tools, training, and support you need to succeed.
-                </p>
-                <p class="damson-prose mt-3 max-w-4xl text-base">
-                    We believe mushrooms are more than food — they are a pathway to better nutrition, job creation, and economic empowerment, especially for youth and women in Rwanda.
-                </p>
-                <div class="mt-8 grid gap-6 lg:grid-cols-2 lg:gap-8">
+            <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+                <div>
+                    <h2 class="damson-section-title">Damson Mushroom Business Limited</h2>
+                    <p class="damson-prose mt-3 max-w-4xl text-base">
+                        At DAMSON MUSHROOM FARM LTD, we go beyond mushroom production — we deliver complete, innovative solutions across the entire mushroom value chain. From high-quality fresh and processed mushrooms to reliable spawn, organic compost, and smart farming technologies like DMMS, we support farmers at every stage.
+                    </p>
+                    <p class="damson-prose mt-3 max-w-4xl text-base">
+                        We combine practical expertise with modern agricultural innovation to make mushroom farming accessible, profitable, and sustainable. Whether you are a beginner or an experienced grower, we provide the tools, training, and support you need to succeed.
+                    </p>
+                    <p class="damson-prose mt-3 max-w-4xl text-base">
+                        We believe mushrooms are more than food — they are a pathway to better nutrition, job creation, and economic empowerment, especially for youth and women in Rwanda.
+                    </p>
+                </div>
+                <div class="aspect-video w-full overflow-hidden rounded-2xl border border-stone-200 bg-black shadow-sm">
+                    <iframe
+                        class="h-full w-full"
+                        src="https://www.youtube.com/embed/c4c-ky2IPlQ"
+                        title="DAMSON Mushroom Farm"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        loading="lazy"
+                    ></iframe>
+                </div>
+            </div>
+
+            <div class="mt-14 border-t border-brand-900/10 pt-10">
+                <div class="mb-6">
+                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-damson-orange">Mission &amp; vision</p>
+                    <h2 class="damson-section-title mt-2">How we see and serve the future</h2>
+                </div>
+                <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                     <div class="relative overflow-hidden rounded-2xl border border-brand-900/12 bg-brand-900 p-6 text-brand-100 shadow-sm sm:p-8">
                         <div class="absolute right-0 top-0 h-24 w-24 translate-x-8 -translate-y-8 rounded-full bg-damson-orange/15" aria-hidden="true"></div>
                         <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-damson-yellow">Vision</p>

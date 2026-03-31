@@ -45,7 +45,7 @@
             <article class="rounded-2xl border border-stone-200 bg-white p-6">
                 <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-damson-orange">Mission</h3>
                 <p class="mt-3 text-sm leading-relaxed text-stone-600">
-                    To improve food security, create employment opportunities, and empower farmers by producing high-quality mushrooms and providing accessible training and inputs.
+                    To deliver high-quality mushroom products and innovative farming solutions that empower farmers, improve livelihoods, and promote sustainable agriculture.
                 </p>
             </article>
         </section>

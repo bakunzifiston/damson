@@ -100,21 +100,23 @@ class DamsonSeeder extends Seeder
         );
 
         Testimonial::query()->updateOrCreate(
-            ['name' => 'Amaka O.', 'headline' => 'DMMS paid for itself in one season'],
+            ['sort_order' => 1],
             [
-                'location' => 'Southwest grower cooperative',
-                'quote' => 'We caught a humidity fault three days before pinning would have collapsed. The tubes and spawn quality match what we were promised — finally a supplier that understands our climate.',
+                'name' => 'UWERA Clémance',
+                'headline' => 'Ubuhinzi bw ibihumyo bwamfashije kwiteza imbere',
+                'location' => 'Rwanda',
+                'quote' => 'Nabanje kugura ibihumyo bya DAMSON MUSHROOM FARM LTD, mbona ari byiza cyane kandi bifite ubuziranenge. Nyuma nahisemo kugura imigina yabo ngo nanjye ntangire ubuhinzi bw ibihumyo. Banyeretse uko bikorwa kandi bampa ubufasha buhoraho mu rugendo rwanjye. Ubu mbona umusaruro mwiza kandi ubuhinzi bw ibihumyo bwamfashije kwiteza imbere.',
                 'is_featured' => true,
-                'sort_order' => 1,
             ]
         );
         Testimonial::query()->updateOrCreate(
-            ['name' => 'Jonas M.', 'headline' => 'Cleaner runs, less waste'],
+            ['sort_order' => 2],
             [
-                'location' => 'Mid-size indoor farm',
-                'quote' => 'Switching spawn batches to DAMSON cut our contamination events roughly in half. Their team helped tune DMMS thresholds for our hybrid rooms.',
+                'name' => 'ENOC SHIBARY ESTOR',
+                'headline' => 'Témoignage de ENOC SHIBARY ESTOR, Goma (Quartier Himbi)',
+                'location' => 'Goma (Quartier Himbi)',
+                'quote' => 'Je suis producteur et commerçant de champignons à Goma, et je travaille avec DAMSON MUSHROOM FARM LTD depuis 5 ans. J’achète chez eux des semences de qualité ainsi que des champignons que je revends sur le marché local. Leur accompagnement technique m’a beaucoup aidé à améliorer ma production et mon activité commerciale. Grâce à ce partenariat, mes revenus ont augmenté et mon activité s’est bien développée.',
                 'is_featured' => true,
-                'sort_order' => 2,
             ]
         );
         Testimonial::query()->updateOrCreate(

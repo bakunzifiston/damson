@@ -12,11 +12,11 @@
             <div class="absolute inset-0 bg-gradient-to-t from-brand-950/92 via-brand-900/70 to-brand-900/35 sm:bg-gradient-to-r sm:from-brand-950/88 sm:via-brand-900/55 sm:to-brand-800/25"></div>
         </div>
         <div class="relative z-10 mx-auto w-full max-w-6xl px-4 pb-14 pt-24 sm:px-6 sm:pb-20 sm:pt-28 lg:px-8">
-            <h1 class="max-w-[18ch] font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-white drop-shadow-sm sm:max-w-xl sm:text-4xl lg:text-5xl lg:leading-[1.1]">
-                Premium Mushrooms, Quality Spawn &amp; Professional Training in Rwanda
+            <h1 class="max-w-[24ch] font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-white drop-shadow-sm sm:max-w-xl sm:text-4xl lg:text-5xl lg:leading-[1.1]">
+                Welcome to DAMSON MUSHROOM FARM LTD
             </h1>
             <p class="mt-5 max-w-3xl text-[15px] leading-relaxed text-stone-200 sm:text-base">
-                Damson Mushroom Business Limited is a leading agribusiness specializing in mushroom production, spawn (tubes) manufacturing, and farmer training, committed to improving nutrition, creating jobs, and promoting sustainable agriculture.
+                At DAMSON MUSHROOM FARM LTD, we go beyond mushroom production — we deliver complete, innovative solutions across the entire mushroom value chain. From high-quality fresh and processed mushrooms to reliable spawn, organic compost, and smart farming technologies like DMMS, we support farmers at every stage.
             </p>
             <div class="mt-8 flex flex-wrap gap-3">
                 <a href="{{ route('store.index') }}" class="damson-btn-accent">Shop Fresh Mushrooms</a>
@@ -31,10 +31,13 @@
             <div>
                 <h2 class="damson-section-title">Damson Mushroom Business Limited</h2>
                 <p class="damson-prose mt-3 max-w-4xl text-base">
-                    At Damson Mushroom Business Limited, we are more than just mushroom producers — we are a complete mushroom value chain solution provider. From producing high-quality mushrooms to supplying reliable mushroom spawn and offering hands-on training, we play a critical role in transforming agriculture and empowering communities across Rwanda.
+                    At DAMSON MUSHROOM FARM LTD, we go beyond mushroom production — we deliver complete, innovative solutions across the entire mushroom value chain. From high-quality fresh and processed mushrooms to reliable spawn, organic compost, and smart farming technologies like DMMS, we support farmers at every stage.
                 </p>
                 <p class="damson-prose mt-3 max-w-4xl text-base">
-                    Our work bridges the gap between modern agricultural technology and practical farming, ensuring that both beginners and experienced farmers can succeed in mushroom production. We believe mushrooms are not only a nutritious food source but also a powerful tool for economic empowerment, especially for youth and women.
+                    We combine practical expertise with modern agricultural innovation to make mushroom farming accessible, profitable, and sustainable. Whether you are a beginner or an experienced grower, we provide the tools, training, and support you need to succeed.
+                </p>
+                <p class="damson-prose mt-3 max-w-4xl text-base">
+                    We believe mushrooms are more than food — they are a pathway to better nutrition, job creation, and economic empowerment, especially for youth and women in Rwanda.
                 </p>
                 <div class="mt-8 grid gap-6 lg:grid-cols-2 lg:gap-8">
                     <div class="relative overflow-hidden rounded-2xl border border-brand-900/12 bg-brand-900 p-6 text-brand-100 shadow-sm sm:p-8">
@@ -49,7 +52,7 @@
                         <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-damson-orange">Mission</p>
                         <h3 class="mt-3 font-display text-xl font-semibold text-brand-950 sm:text-2xl">How we show up every day</h3>
                         <p class="mt-4 damson-prose text-sm sm:text-base">
-                            To improve food security, create employment opportunities, and empower farmers by producing high-quality mushrooms and providing accessible training and inputs.
+                            To deliver high-quality mushroom products and innovative farming solutions that empower farmers, improve livelihoods, and promote sustainable agriculture.
                         </p>
                         <p class="mt-6">
                             <a href="{{ route('about') }}" class="text-sm font-semibold text-damson-orange hover:text-damson-orange-hover">Our story →</a>

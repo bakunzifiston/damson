@@ -18,5 +18,6 @@
     @include('partials.footer')
     @include('partials.chat-widget')
     @stack('scripts')
+    @include('partials.matomo')
 </body>
 </html>

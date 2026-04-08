@@ -25,5 +25,6 @@
             </main>
         </div>
     </div>
+    @include('partials.matomo')
 </body>
 </html>

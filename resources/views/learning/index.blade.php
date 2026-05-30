@@ -68,7 +68,7 @@
                 ] as $course)
                     <article class="landing-product-card overflow-hidden" data-reveal>
                         <div class="aspect-[16/10] overflow-hidden bg-stone-100">
-                            <img src="{{ asset($course['image']) }}" alt="" class="h-full w-full object-cover">
+                            <img src="{{ damson_asset($course['image']) }}" alt="" class="h-full w-full object-cover">
                         </div>
                         <div class="p-5">
                             <p class="text-xs font-medium text-stone-500">{{ $course['meta'] }}</p>

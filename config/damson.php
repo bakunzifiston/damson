@@ -2,6 +2,12 @@
 
 return [
 
+    /*
+    | cPanel: set DAMSON_ASSET_PREFIX=public when URLs must be /public/images/... and /public/storage/...
+    | Leave empty for standard Laravel public/ as web root.
+    */
+    'asset_prefix' => env('DAMSON_ASSET_PREFIX', ''),
+
     'contact' => [
         'email' => env('DAMSON_CONTACT_EMAIL', 'hello@damsonmushroom.com'),
         'phone' => env('DAMSON_PHONE', '+1 (555) 010-2030'),

@@ -17,7 +17,7 @@
 <header class="sticky top-0 z-50 border-b border-brand-900/15 bg-white shadow-[0_1px_0_0_rgba(0,68,43,0.08)]">
     <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
         <a href="{{ route('home') }}" class="group flex items-center gap-3">
-            <img src="{{ asset('images/logo.png') }}" alt="DAMSON Mushroom Farm Ltd" width="48" height="48" class="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-brand-900/10 transition group-hover:ring-damson-orange/40 sm:h-12 sm:w-12">
+            <img src="{{ damson_asset('images/logo.png') }}" alt="DAMSON Mushroom Farm Ltd" width="48" height="48" class="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-brand-900/10 transition group-hover:ring-damson-orange/40 sm:h-12 sm:w-12">
             <span class="hidden font-display text-lg font-semibold tracking-tight text-brand-950 sm:inline">DAMSON</span>
         </a>
         <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">

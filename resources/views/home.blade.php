@@ -28,6 +28,34 @@
 
     <section class="relative z-10 -mt-6 px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-14 lg:px-8">
         <div class="store-surface mx-auto max-w-6xl px-6 py-10 sm:px-8 sm:py-12">
+            <div>
+                <div class="mb-6">
+                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-damson-orange">Mission &amp; vision</p>
+                    <h2 class="damson-section-title mt-2">How we see and serve the future</h2>
+                </div>
+                <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
+                    <div class="relative overflow-hidden rounded-2xl border border-brand-900/12 bg-brand-900 p-6 text-brand-100 shadow-sm sm:p-8">
+                        <div class="absolute right-0 top-0 h-24 w-24 translate-x-8 -translate-y-8 rounded-full bg-damson-orange/15" aria-hidden="true"></div>
+                        <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-damson-yellow">Vision</p>
+                        <h3 class="mt-3 font-display text-xl font-semibold text-white sm:text-2xl">Growing Mushrooms, Growing Livelihoods, Empowering Communities</h3>
+                        <p class="mt-4 text-sm leading-relaxed text-brand-100/90 sm:text-base">
+                            To become Rwanda&rsquo;s leading mushroom agribusiness and a regional hub for mushroom training and innovation.
+                        </p>
+                    </div>
+                    <div class="rounded-2xl border border-brand-900/12 bg-brand-100/50 p-6 shadow-sm sm:p-8">
+                        <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-damson-orange">Mission</p>
+                        <h3 class="mt-3 font-display text-xl font-semibold text-brand-950 sm:text-2xl">How we show up every day</h3>
+                        <p class="mt-4 damson-prose text-sm sm:text-base">
+                            To deliver high-quality mushroom products and innovative farming solutions that empower farmers, improve livelihoods, and promote sustainable agriculture.
+                        </p>
+                        <p class="mt-6">
+                            <a href="{{ route('about') }}" class="text-sm font-semibold text-damson-orange hover:text-damson-orange-hover">Our story →</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-14 border-t border-brand-900/10 pt-10">
             <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
                 <div>
                     <h2 class="damson-section-title">Damson Mushroom Business Limited</h2>
@@ -54,32 +82,6 @@
                     ></iframe>
                 </div>
             </div>
-
-            <div class="mt-14 border-t border-brand-900/10 pt-10">
-                <div class="mb-6">
-                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-damson-orange">Mission &amp; vision</p>
-                    <h2 class="damson-section-title mt-2">How we see and serve the future</h2>
-                </div>
-                <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                    <div class="relative overflow-hidden rounded-2xl border border-brand-900/12 bg-brand-900 p-6 text-brand-100 shadow-sm sm:p-8">
-                        <div class="absolute right-0 top-0 h-24 w-24 translate-x-8 -translate-y-8 rounded-full bg-damson-orange/15" aria-hidden="true"></div>
-                        <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-damson-yellow">Vision</p>
-                        <h3 class="mt-3 font-display text-xl font-semibold text-white sm:text-2xl">Growing Mushrooms, Growing Livelihoods, Empowering Communities</h3>
-                        <p class="mt-4 text-sm leading-relaxed text-brand-100/90 sm:text-base">
-                            To become Rwanda&rsquo;s leading mushroom agribusiness and a regional hub for mushroom training and innovation.
-                        </p>
-                    </div>
-                    <div class="rounded-2xl border border-brand-900/12 bg-brand-100/50 p-6 shadow-sm sm:p-8">
-                        <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-damson-orange">Mission</p>
-                        <h3 class="mt-3 font-display text-xl font-semibold text-brand-950 sm:text-2xl">How we show up every day</h3>
-                        <p class="mt-4 damson-prose text-sm sm:text-base">
-                            To deliver high-quality mushroom products and innovative farming solutions that empower farmers, improve livelihoods, and promote sustainable agriculture.
-                        </p>
-                        <p class="mt-6">
-                            <a href="{{ route('about') }}" class="text-sm font-semibold text-damson-orange hover:text-damson-orange-hover">Our story →</a>
-                        </p>
-                    </div>
-                </div>
             </div>
 
             @php

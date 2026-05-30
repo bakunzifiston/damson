@@ -8,7 +8,7 @@
         <div class="grid gap-12 lg:grid-cols-12 lg:gap-10">
             <div class="lg:col-span-4">
                 <div class="flex items-center gap-3">
-                    <img src="{{ damson_asset('images/logo.png') }}" alt="" width="44" height="44" class="h-11 w-11 rounded-full object-cover ring-2 ring-white/25" role="presentation">
+                    <img src="{{ asset('images/logo.png') }}" alt="" width="44" height="44" class="h-11 w-11 rounded-full object-cover ring-2 ring-white/25" role="presentation">
                     <div>
                         <p class="font-display text-xl font-semibold text-white">DAMSON</p>
                         <p class="text-xs text-brand-100/70">Mushroom Farm Ltd</p>

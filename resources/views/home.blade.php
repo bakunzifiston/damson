@@ -7,9 +7,9 @@
         $sym = config('app.currency_symbol', '$');
         $stats = config('damson.stats');
         $heroSlides = [
-            damson_asset('images/home-banner-mushroom.png'),
-            damson_asset('images/african-mushroom.png'),
-            damson_asset('images/dried-oyster-mushroom.png'),
+            asset('images/home-banner-mushroom.png'),
+            asset('images/african-mushroom.png'),
+            asset('images/dried-oyster-mushroom.png'),
         ];
     @endphp
 
@@ -116,7 +116,7 @@
                                 <article class="featured-product-card group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-[0_16px_48px_-32px_rgba(0,68,43,0.28)] ring-1 ring-brand-900/8 transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_56px_-32px_rgba(0,68,43,0.35)]">
                                     <a href="{{ route('store.show', $product) }}" class="relative block aspect-square overflow-hidden bg-stone-100">
                                         @if ($product->image_path)
-                                            <img src="{{ damson_storage_url($product->image_path) }}" alt="{{ $product->name }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" width="400" height="400">
+                                            <img src="{{ '/public/storage/'.$product->image_path }}" alt="{{ $product->name }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" width="400" height="400">
                                         @else
                                             <div class="flex h-full items-center justify-center text-sm text-stone-400">No image</div>
                                         @endif
@@ -176,7 +176,7 @@
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
                     <div class="relative overflow-hidden rounded-3xl shadow-lg" data-reveal>
-                        <img src="{{ damson_asset('images/home-banner-mushroom.png') }}" alt="DAMSON mushroom farm" class="aspect-[4/3] w-full object-cover" width="900" height="675">
+                        <img src="{{ asset('images/home-banner-mushroom.png') }}" alt="DAMSON mushroom farm" class="aspect-[4/3] w-full object-cover" width="900" height="675">
                         <div class="absolute inset-0 rounded-3xl ring-1 ring-inset ring-brand-900/10"></div>
                     </div>
                     <div data-reveal>
@@ -363,7 +363,7 @@
 
         {{-- CTA --}}
         <section class="relative overflow-hidden py-14 sm:py-16">
-            <img src="{{ damson_asset('images/home-banner-mushroom.png') }}" alt="" class="absolute inset-0 h-full w-full object-cover" aria-hidden="true">
+            <img src="{{ asset('images/home-banner-mushroom.png') }}" alt="" class="absolute inset-0 h-full w-full object-cover" aria-hidden="true">
             <div class="absolute inset-0 bg-gradient-to-r from-brand-950/92 via-brand-900/85 to-brand-800/75"></div>
             <div class="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8" data-reveal>
                 <h2 class="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">

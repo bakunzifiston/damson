@@ -38,7 +38,7 @@
                             <li>
                                 <a href="{{ route('store.show', $product) }}" class="landing-card flex items-center gap-4 p-4 transition hover:border-damson-orange/40">
                                     @if ($product->image_path)
-                                        <img src="{{ damson_storage_url($product->image_path) }}" alt="" class="h-16 w-16 shrink-0 rounded-lg object-cover">
+                                        <img src="{{ '/public/storage/'.$product->image_path }}" alt="" class="h-16 w-16 shrink-0 rounded-lg object-cover">
                                     @endif
                                     <div class="min-w-0">
                                         <p class="truncate text-sm font-semibold text-brand-950">{{ $product->name }}</p>
@@ -154,7 +154,7 @@
                             <article class="store-card flex h-full flex-col">
                                 <div class="relative aspect-square overflow-hidden bg-stone-100">
                                         @if ($product->image_path)
-                                            <img src="{{ damson_storage_url($product->image_path) }}" alt="" class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]" width="600" height="600">
+                                            <img src="{{ '/public/storage/'.$product->image_path }}" alt="" class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]" width="600" height="600">
                                     @else
                                         <div class="flex h-full items-center justify-center text-sm text-stone-400">No image</div>
                                     @endif

@@ -9,7 +9,7 @@
     <div class="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-damson-orange/20 via-brand-950/80 to-transparent" aria-hidden="true"></div>
 
     <div class="relative flex items-center gap-3 border-b border-white/10 px-5 py-6">
-        <img src="{{ damson_asset('images/logo.png') }}" alt="" width="44" height="44" class="h-11 w-11 rounded-full object-cover ring-2 ring-white/20" role="presentation">
+        <img src="{{ asset('images/logo.png') }}" alt="" width="44" height="44" class="h-11 w-11 rounded-full object-cover ring-2 ring-white/20" role="presentation">
         <div>
             <p class="font-display text-lg font-semibold tracking-tight text-white">DAMSON</p>
             <p class="text-[10px] font-medium uppercase tracking-[0.15em] text-damson-yellow/90">Staff</p>

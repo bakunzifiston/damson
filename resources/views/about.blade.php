@@ -18,7 +18,7 @@
         <div class="page-shell">
             <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16" data-reveal>
                 <div class="relative overflow-hidden rounded-3xl shadow-lg">
-                    <img src="{{ damson_asset('images/dried-oyster-mushroom.png') }}" alt="DAMSON mushroom products" class="aspect-[4/3] w-full object-contain bg-white p-4">
+                    <img src="{{ asset('images/dried-oyster-mushroom.png') }}" alt="DAMSON mushroom products" class="aspect-[4/3] w-full object-contain bg-white p-4">
                 </div>
                 <div>
                     <p class="landing-eyebrow">Company overview</p>

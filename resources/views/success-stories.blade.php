@@ -23,7 +23,7 @@
             <div class="page-shell">
                 <article class="overflow-hidden rounded-3xl border border-stone-200 bg-gradient-to-br from-brand-50 to-white shadow-lg lg:grid lg:grid-cols-2" data-reveal>
                     <div class="relative min-h-[240px] bg-brand-900 lg:min-h-full">
-                        <img src="{{ damson_asset('images/home-banner-mushroom.png') }}" alt="" class="h-full w-full object-cover opacity-80">
+                        <img src="{{ asset('images/home-banner-mushroom.png') }}" alt="" class="h-full w-full object-cover opacity-80">
                         <div class="absolute inset-0 bg-gradient-to-t from-brand-950/80 to-transparent"></div>
                         <span class="absolute left-6 top-6 rounded-full bg-damson-orange px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">Featured story</span>
                     </div>

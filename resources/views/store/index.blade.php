@@ -50,19 +50,6 @@
                     </ul>
                 </div>
             @endif
-            <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5" data-reveal>
-                @foreach ([
-                    ['label' => 'Fresh Mushrooms', 'cat' => 'mushrooms'],
-                    ['label' => 'Spawn / Tubes', 'cat' => 'tubes'],
-                    ['label' => 'Compost', 'cat' => 'compost'],
-                    ['label' => 'Equipment', 'cat' => 'equipment'],
-                    ['label' => 'DMMS', 'cat' => 'dmms'],
-                ] as $catCard)
-                    <a href="{{ route('store.index', ['category' => $catCard['cat']]) }}" class="landing-card py-4 text-center text-sm font-semibold text-brand-950 transition hover:border-damson-orange/50 hover:text-damson-orange">
-                        {{ $catCard['label'] }}
-                    </a>
-                @endforeach
-            </div>
         </div>
     </section>
 

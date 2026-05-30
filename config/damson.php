@@ -21,4 +21,16 @@ return [
         'whatsapp' => env('DAMSON_WHATSAPP_URL'),
     ],
 
+    'stats' => [
+        'years_experience' => (int) env('DAMSON_STAT_YEARS', 15),
+        'farmers_supported' => (int) env('DAMSON_STAT_FARMERS', 1200),
+        'products_delivered' => (int) env('DAMSON_STAT_PRODUCTS', 50000),
+        'farmers_trained' => (int) env('DAMSON_STAT_TRAINED', 850),
+        'spawn_produced' => (int) env('DAMSON_STAT_SPAWN', 250000),
+        'products_sold' => (int) env('DAMSON_STAT_SOLD', 75000),
+        'yield_improved_pct' => (int) env('DAMSON_STAT_YIELD', 40),
+        'training_sessions' => (int) env('DAMSON_STAT_SESSIONS', 320),
+        'districts_reached' => (int) env('DAMSON_STAT_DISTRICTS', 18),
+    ],
+
 ];

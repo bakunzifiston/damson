@@ -15,18 +15,20 @@ class PageController extends Controller
             ->limit(3)
             ->get();
 
-        $latestProducts = Product::query()
+        $featuredProducts = Product::query()
             ->active()
             ->latest()
-            ->limit(8)
+            ->limit(4)
             ->get();
 
-        return view('home', compact('testimonials', 'latestProducts'));
+        return view('home', compact('testimonials', 'featuredProducts'));
     }
 
     public function about()
     {
-        return view('about');
+        return view('about', [
+            'stats' => config('damson.stats'),
+        ]);
     }
 
     public function formsHub()

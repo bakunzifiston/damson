@@ -14,6 +14,8 @@ class TestimonialController extends Controller
             ->orderByDesc('id')
             ->get();
 
-        return view('success-stories', compact('stories'));
+        $featuredStory = $stories->first();
+
+        return view('success-stories', compact('stories', 'featuredStory'));
     }
 }

@@ -6,13 +6,20 @@ use App\Models\BlogPost;
 use App\Models\Faq;
 use App\Models\Guide;
 use App\Models\LibraryResource;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class LearningController extends Controller
 {
     public function index()
     {
-        return view('learning.index');
+        $testimonials = Testimonial::query()
+            ->where('is_featured', true)
+            ->orderBy('sort_order')
+            ->limit(3)
+            ->get();
+
+        return view('learning.index', compact('testimonials'));
     }
 
     public function blogIndex()

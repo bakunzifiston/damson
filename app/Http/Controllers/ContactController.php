@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
+use App\Models\Faq;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,9 @@ class ContactController extends Controller
 {
     public function show(): View
     {
-        return view('contact');
+        $faqs = Faq::query()->orderBy('sort_order')->orderBy('id')->limit(10)->get();
+
+        return view('contact', compact('faqs'));
     }
 
     public function store(Request $request): RedirectResponse

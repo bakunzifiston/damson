@@ -110,6 +110,150 @@
         @apply rounded-2xl border border-stone-200/70 bg-white shadow-[0_6px_20px_-16px_rgba(0,0,0,0.35)];
     }
 
+    /* Landing page */
+    .landing-section {
+        @apply py-12 sm:py-14 lg:py-16;
+    }
+
+    .landing-eyebrow {
+        @apply text-xs font-semibold uppercase tracking-[0.22em] text-damson-orange;
+    }
+
+    .landing-card {
+        @apply rounded-2xl border border-stone-200/80 bg-white p-6 shadow-[0_12px_40px_-24px_rgba(0,68,43,0.25)] transition duration-300;
+        @apply hover:-translate-y-1 hover:border-brand-300/60 hover:shadow-[0_24px_48px_-28px_rgba(0,68,43,0.35)];
+    }
+
+    .landing-card-dark {
+        @apply rounded-2xl border border-brand-800/40 bg-brand-900 p-6 text-brand-50 shadow-lg transition duration-300;
+        @apply hover:-translate-y-1 hover:shadow-xl;
+    }
+
+    .landing-stat {
+        @apply rounded-2xl border border-brand-200/60 bg-white/90 p-5 text-center shadow-sm backdrop-blur-sm;
+    }
+
+    .landing-glass {
+        @apply rounded-2xl border border-white/15 bg-black/45 p-4 shadow-[0_12px_40px_rgba(0,0,0,0.45)] backdrop-blur-md;
+    }
+
+    .hero-slide {
+        @apply opacity-0 transition-opacity duration-[1.4s] ease-in-out;
+    }
+
+    .hero-slide.is-active {
+        @apply z-[1] opacity-100;
+    }
+
+    .hero-dot {
+        @apply h-2 w-2 rounded-full bg-white/40 transition-all duration-300;
+    }
+
+    .hero-dot.is-active {
+        @apply w-7 bg-white;
+    }
+
+    .landing-icon-wrap {
+        @apply flex h-12 w-12 items-center justify-center rounded-xl bg-brand-900 text-white shadow-sm;
+    }
+
+    .landing-icon-wrap-accent {
+        @apply flex h-12 w-12 items-center justify-center rounded-xl bg-damson-orange text-white shadow-sm;
+    }
+
+    .landing-product-card {
+        @apply flex h-full flex-col overflow-hidden rounded-2xl border border-stone-200/80 bg-white transition;
+        @apply shadow-[0_8px_28px_-20px_rgba(0,0,0,0.35)] hover:-translate-y-0.5 hover:shadow-[0_20px_44px_-28px_rgba(0,0,0,0.45)];
+    }
+
+    .landing-btn-ghost {
+        @apply inline-flex items-center justify-center rounded-xl border-2 border-white/30 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition;
+        @apply hover:border-white/50 hover:bg-white/20;
+    }
+
+    [data-reveal] {
+        @apply translate-y-6 opacity-0 transition duration-700 ease-out;
+    }
+
+    [data-reveal].is-visible {
+        @apply translate-y-0 opacity-100;
+    }
+
+    .testimonial-track {
+        @apply flex transition-transform duration-500 ease-out;
+    }
+
+    .testimonial-dot {
+        @apply h-2 w-2 rounded-full bg-brand-300 transition;
+    }
+
+    .testimonial-dot.is-active {
+        @apply w-6 bg-damson-orange;
+    }
+
+    /* Secondary pages */
+    .page-hero {
+        @apply border-b border-brand-900/20;
+    }
+
+    .page-shell {
+        @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+    }
+
+    .page-section {
+        @apply py-12 sm:py-14 lg:py-16;
+    }
+
+    .page-section-alt {
+        @apply bg-brand-50/70;
+    }
+
+    .page-section-dark {
+        @apply bg-brand-900 text-brand-50;
+    }
+
+    .faq-details summary {
+        @apply flex cursor-pointer list-none items-center justify-between gap-4 font-display text-base font-semibold text-brand-950;
+    }
+
+    .faq-details summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-details[open] summary {
+        @apply text-damson-orange;
+    }
+
+    .timeline-line {
+        @apply absolute left-[11px] top-2 bottom-2 w-0.5 bg-brand-200 sm:left-1/2 sm:-ml-px;
+    }
+
+    [data-story-filter].is-active {
+        @apply border-damson-orange bg-damson-orange text-white shadow-sm;
+    }
+
+    [data-story-filter]:not(.is-active) {
+        @apply border-stone-200 bg-white text-stone-700 hover:border-damson-orange/40 hover:text-damson-orange;
+    }
+
+    .testimonial-card {
+        @apply relative;
+    }
+
+    .testimonial-card::before {
+        content: '';
+        @apply absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-damson-yellow via-damson-orange to-damson-yellow opacity-80;
+    }
+
+    .featured-product-card {
+        @apply relative;
+    }
+
+    .featured-product-card::after {
+        content: '';
+        @apply pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-damson-orange/50 to-transparent opacity-0 transition group-hover:opacity-100;
+    }
+
     .damson-markdown h1,
     .damson-markdown h2,
     .damson-markdown h3 {

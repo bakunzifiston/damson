@@ -8,37 +8,75 @@
 @endphp
 
 @section('content')
-    {{-- Hero (shop style, DAMSON palette) --}}
-    <section class="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-900 to-brand-950 text-white">
-        <div class="absolute inset-y-0 right-0 hidden w-1/2 lg:block">
-            <img src="{{ asset('images/african-mushroom.png') }}"
-                 alt=""
-                 class="h-full w-full object-cover opacity-90"
-                 width="1200" height="800">
-            <div class="absolute inset-0 bg-gradient-to-r from-brand-900 via-brand-900/80 to-transparent"></div>
-        </div>
-        <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:py-24 lg:pr-[42%]">
-            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-damson-yellow">DAMSON store</p>
-            <h1 class="mt-3 font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">Shop our products</h1>
-            <p class="mt-4 max-w-xl text-sm leading-relaxed text-brand-100 sm:text-base">
-                Tubes, spawn, DMMS kits, and more — filter by category and price, add items to your cart, and check out when you are ready.
-            </p>
-            <p class="mt-6">
-                <a href="{{ route('store.cart') }}" class="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:border-damson-yellow/50 hover:bg-white/15">
+    @include('partials.page-hero', [
+        'title' => 'Shop our products',
+        'subtitle' => 'Tubes, spawn, fresh mushrooms, and more — filter, search, add to cart, and check out when you are ready.',
+        'eyebrow' => 'DAMSON store',
+        'image' => 'images/african-mushroom.png',
+        'breadcrumbs' => [
+            ['label' => 'Home', 'url' => route('home')],
+            ['label' => 'Store'],
+        ],
+    ])
+
+    <section class="page-section bg-white pb-0">
+        <div class="page-shell">
+            <div class="flex flex-wrap items-center justify-between gap-4" data-reveal>
+                <a href="{{ route('store.cart') }}" class="inline-flex items-center gap-2 rounded-xl border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-brand-950 shadow-sm transition hover:border-damson-orange/40 hover:text-damson-orange">
                     View cart
                     @if ($storeCartCount > 0)
-                        <span class="rounded-full bg-damson-orange px-2 py-0.5 text-[11px] font-bold leading-none text-white">{{ $storeCartCount > 99 ? '99+' : $storeCartCount }}</span>
+                        <span class="rounded-full bg-damson-orange px-2 py-0.5 text-[11px] font-bold text-white">{{ $storeCartCount > 99 ? '99+' : $storeCartCount }}</span>
                     @endif
                 </a>
-            </p>
+            </div>
+            @if ($featuredProducts->isNotEmpty())
+                <div class="mt-10" data-reveal>
+                    <p class="landing-eyebrow">Featured</p>
+                    <h2 class="font-display text-xl font-semibold text-brand-950">Popular right now</h2>
+                    <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                        @foreach ($featuredProducts as $product)
+                            <li>
+                                <a href="{{ route('store.show', $product) }}" class="landing-card flex items-center gap-4 p-4 transition hover:border-damson-orange/40">
+                                    @if ($product->image_path)
+                                        <img src="{{ '/public/storage/'.$product->image_path }}" alt="" class="h-16 w-16 shrink-0 rounded-lg object-cover">
+                                    @endif
+                                    <div class="min-w-0">
+                                        <p class="truncate text-sm font-semibold text-brand-950">{{ $product->name }}</p>
+                                        <p class="text-sm font-semibold text-damson-orange">{{ $sym }}{{ number_format((float) $product->price, 0) }}</p>
+                                    </div>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5" data-reveal>
+                @foreach ([
+                    ['label' => 'Fresh Mushrooms', 'cat' => 'mushrooms'],
+                    ['label' => 'Spawn / Tubes', 'cat' => 'tubes'],
+                    ['label' => 'Compost', 'cat' => 'compost'],
+                    ['label' => 'Equipment', 'cat' => 'equipment'],
+                    ['label' => 'DMMS', 'cat' => 'dmms'],
+                ] as $catCard)
+                    <a href="{{ route('store.index', ['category' => $catCard['cat']]) }}" class="landing-card py-4 text-center text-sm font-semibold text-brand-950 transition hover:border-damson-orange/50 hover:text-damson-orange">
+                        {{ $catCard['label'] }}
+                    </a>
+                @endforeach
+            </div>
         </div>
     </section>
 
-    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+    <div class="page-shell pb-16 pt-4 sm:pb-20 lg:pb-24">
         <form action="{{ route('store.index') }}" method="get" id="store-filter-form" class="lg:grid lg:grid-cols-[min(280px,100%)_1fr] lg:items-start lg:gap-10 xl:gap-12">
             {{-- Sidebar filters --}}
             <aside class="store-panel sticky top-24 mb-10 p-6 lg:mb-0">
                 <h2 class="font-display text-lg font-semibold text-damson-orange">Filter products</h2>
+
+                <div class="mt-6">
+                    <label for="store-search" class="text-xs font-semibold uppercase tracking-wide text-stone-500">Search</label>
+                    <input type="search" name="q" id="store-search" value="{{ $search }}" placeholder="Search products…"
+                           class="damson-input mt-1 text-sm">
+                </div>
 
                 <div class="mt-6">
                     <p class="text-xs font-semibold uppercase tracking-wide text-stone-500">Price range</p>
@@ -145,12 +183,15 @@
                                         <a href="{{ route('store.show', $product) }}" class="hover:text-damson-orange">{{ $product->name }}</a>
                                     </h2>
                                     <p class="mt-2 line-clamp-2 text-xs text-stone-500">{{ Str::limit(strip_tags($product->description), 90) }}</p>
-                                    <p class="mt-4 text-lg font-semibold text-damson-orange">
+                                    <p class="mt-2 text-xs font-medium {{ $product->stock > 0 ? 'text-brand-700' : 'text-red-600' }}">
+                                        {{ $product->stock > 0 ? 'In stock ('.$product->stock.')' : 'Out of stock' }}
+                                    </p>
+                                    <p class="mt-3 text-lg font-semibold text-damson-orange">
                                         {{ $sym }}{{ number_format((float) $product->price, 2) }}
                                         <span class="text-xs font-normal text-stone-500">/ {{ $product->unit ?? 'unit' }}</span>
                                     </p>
                                     <div class="mt-auto space-y-3 pt-5">
-                                        <a href="{{ route('store.show', $product) }}" class="damson-btn-accent block w-full rounded-xl py-2.5 text-center text-sm font-semibold shadow-md">View product</a>
+                                        <a href="{{ route('store.show', $product) }}" class="damson-btn-accent block w-full rounded-xl py-2.5 text-center text-sm font-semibold shadow-md">View details</a>
                                         @if ($product->stock > 0)
                                             <form action="{{ route('store.cart.add') }}" method="post" class="flex flex-wrap items-end gap-2">
                                                 @csrf
@@ -182,6 +223,25 @@
             </div>
         </form>
     </div>
+
+    <section class="page-section page-section-alt border-t border-stone-200/80">
+        <div class="page-shell">
+            <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-reveal>
+                @foreach ([
+                    ['icon' => 'award', 'title' => 'Quality Guarantee', 'text' => 'Trusted spawn and mushroom products.'],
+                    ['icon' => 'package', 'title' => 'Fast Fulfillment', 'text' => 'Reliable supply for your farm.'],
+                    ['icon' => 'handshake', 'title' => 'Customer Support', 'text' => 'Guidance from our expert team.'],
+                    ['icon' => 'target', 'title' => 'Secure Checkout', 'text' => 'Simple ordering through our store.'],
+                ] as $trust)
+                    <article class="landing-card text-center">
+                        <x-landing-icon :name="$trust['icon']" class="mx-auto h-7 w-7 text-damson-orange" />
+                        <h3 class="mt-3 text-sm font-semibold text-brand-950">{{ $trust['title'] }}</h3>
+                        <p class="mt-1 text-xs text-stone-600">{{ $trust['text'] }}</p>
+                    </article>
+                @endforeach
+            </div>
+        </div>
+    </section>
 @endsection
 
 @push('scripts')

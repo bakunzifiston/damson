@@ -46,11 +46,20 @@ class StoreController extends Controller
         }
 
         $category = $request->string('category')->trim()->toString();
+        $search = $request->string('q')->trim()->toString();
 
         $q = Product::query()->active();
 
         if ($category !== '') {
             $q->where('category', $category);
+        }
+
+        if ($search !== '') {
+            $q->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%'.$search.'%')
+                    ->orWhere('description', 'like', '%'.$search.'%')
+                    ->orWhere('sku', 'like', '%'.$search.'%');
+            });
         }
 
         if ($totalCatalog > 0) {
@@ -67,14 +76,22 @@ class StoreController extends Controller
 
         $products = $q->paginate(12)->withQueryString();
 
+        $featuredProducts = Product::query()
+            ->active()
+            ->latest()
+            ->limit(4)
+            ->get();
+
         return view('store.index', [
             'products' => $products,
+            'featuredProducts' => $featuredProducts,
             'categoryCounts' => $categoryCounts,
             'floor' => $floor,
             'ceil' => $ceil,
             'minP' => $minP,
             'maxP' => $maxP,
             'category' => $category,
+            'search' => $search,
             'sort' => $sort,
             'totalCatalog' => $totalCatalog,
         ]);

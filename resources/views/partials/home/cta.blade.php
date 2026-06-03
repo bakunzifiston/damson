@@ -1,11 +1,15 @@
 {{-- Call-to-Action Section --}}
 <section class="relative overflow-hidden py-14 sm:py-16">
     {{-- Background Image & Overlay --}}
+    @php
+        $ctaImage = \App\Models\Product::whereNotNull('image_path')->first()?->image_path ?? 'products/LNInqjKmevaGh64TDEMz2pc4UbpcaL0tCJbw9fcE.jpg';
+    @endphp
     <img
-        src="{{ asset('images/home-banner-mushroom.png') }}"
+        src="{{ '/storage/' . $ctaImage }}"
         alt=""
         class="absolute inset-0 h-full w-full object-cover"
         aria-hidden="true"
+        loading="lazy"
     >
     <div class="absolute inset-0 bg-gradient-to-r from-brand-950/92 via-brand-900/85 to-brand-800/75"></div>
 

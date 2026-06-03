@@ -1,10 +1,9 @@
 {{-- Hero Section --}}
 @php
-    $heroSlides = [
-        asset('images/home-banner-mushroom.png'),
-        asset('images/african-mushroom.png'),
-        asset('images/dried-oyster-mushroom.png'),
-    ];
+    $products = \App\Models\Product::whereNotNull('image_path')->limit(3)->get();
+    $heroSlides = $products->isNotEmpty() 
+        ? $products->map(fn($p) => '/storage/' . $p->image_path)->toArray()
+        : ['/storage/products/LNInqjKmevaGh64TDEMz2pc4UbpcaL0tCJbw9fcE.jpg'];
 @endphp
 
 <section class="relative flex min-h-[72vh] items-end overflow-hidden sm:min-h-[76vh] sm:items-center">

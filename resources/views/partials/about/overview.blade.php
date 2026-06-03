@@ -4,7 +4,10 @@
         <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16" data-reveal>
             {{-- Image --}}
             <div class="relative overflow-hidden rounded-3xl shadow-lg">
-                <img src="{{ asset('images/dried-oyster-mushroom.png') }}" alt="DAMSON mushroom products" class="aspect-[4/3] w-full object-contain bg-white p-4">
+                @php
+                    $featuredImage = \App\Models\Product::whereNotNull('image_path')->first()?->image_path ?? 'products/LNInqjKmevaGh64TDEMz2pc4UbpcaL0tCJbw9fcE.jpg';
+                @endphp
+                <img src="{{ '/storage/' . $featuredImage }}" alt="DAMSON mushroom products" class="aspect-[4/3] w-full object-contain bg-white p-4" loading="lazy">
             </div>
 
             {{-- Text Content --}}

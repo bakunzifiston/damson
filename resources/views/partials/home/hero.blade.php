@@ -1,9 +1,14 @@
-{{-- Hero Section --}}
+{{-- Hero Section — static banners; /public/ on hosting matches store product image URLs --}}
 @php
-    $products = \App\Models\Product::whereNotNull('image_path')->limit(3)->get();
-    $heroSlides = $products->isNotEmpty() 
-        ? $products->map(fn($p) => '/storage/' . $p->image_path)->toArray()
-        : ['/storage/products/LNInqjKmevaGh64TDEMz2pc4UbpcaL0tCJbw9fcE.jpg'];
+    $heroSlideFiles = [
+        'images/home-banner-mushroom.png',
+        'images/african-mushroom.png',
+        'images/dried-oyster-mushroom.png',
+    ];
+    $heroSlides = array_map(
+        fn (string $path) => app()->environment('local') ? asset($path) : '/public/'.$path,
+        $heroSlideFiles
+    );
 @endphp
 
 <section class="relative flex min-h-[72vh] items-end overflow-hidden sm:min-h-[76vh] sm:items-center">

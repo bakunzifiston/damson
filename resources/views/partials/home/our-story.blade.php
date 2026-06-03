@@ -6,10 +6,12 @@
             {{-- Image Column --}}
             <div class="relative overflow-hidden rounded-3xl shadow-lg" data-reveal>
                 @php
-                    $storyImage = \App\Models\Product::whereNotNull('image_path')->first()?->image_path ?? 'products/LNInqjKmevaGh64TDEMz2pc4UbpcaL0tCJbw9fcE.jpg';
+                    $storyImageSrc = app()->environment('local')
+                        ? asset('images/home-banner-mushroom.png')
+                        : '/public/images/home-banner-mushroom.png';
                 @endphp
                 <img
-                    src="{{ '/storage/' . $storyImage }}"
+                    src="{{ $storyImageSrc }}"
                     alt="DAMSON mushroom farm"
                     class="aspect-[4/3] w-full object-cover"
                     width="900"

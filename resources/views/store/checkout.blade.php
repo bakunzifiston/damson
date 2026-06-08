@@ -58,6 +58,30 @@
                 <textarea id="customer_notes" name="customer_notes" rows="3"
                           class="mt-1 w-full rounded-xl border border-stone-200 px-3 py-2.5 text-sm shadow-sm focus:border-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-900/15">{{ old('customer_notes') }}</textarea>
             </div>
+
+            <fieldset>
+                <legend class="block text-xs font-semibold uppercase tracking-wide text-stone-500">Payment method</legend>
+                <div class="mt-3 space-y-3">
+                    <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-damson-orange/40 bg-damson-orange/5 p-4 shadow-sm ring-2 ring-damson-orange/20">
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="{{ \App\Models\Order::PAYMENT_CASH_ON_DELIVERY }}"
+                            class="mt-1 h-4 w-4 border-stone-300 text-damson-orange focus:ring-damson-orange/30"
+                            @checked(old('payment_method', \App\Models\Order::PAYMENT_CASH_ON_DELIVERY) === \App\Models\Order::PAYMENT_CASH_ON_DELIVERY)
+                            required
+                        >
+                        <span>
+                            <span class="block text-sm font-semibold text-brand-950">Cash on delivery</span>
+                            <span class="mt-1 block text-sm text-stone-600">Pay in cash when your order is delivered to your address.</span>
+                        </span>
+                    </label>
+                </div>
+                @error('payment_method')
+                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </fieldset>
+
             <div class="flex flex-wrap gap-3 pt-2">
                 <button type="submit" class="damson-btn-accent rounded-xl px-8 py-3 text-sm font-semibold shadow-md">Place order</button>
                 <a href="{{ route('store.cart') }}" class="inline-flex items-center rounded-xl border border-stone-200 px-6 py-3 text-sm font-semibold text-stone-700 hover:border-damson-orange/40 hover:text-damson-orange">Back to cart</a>

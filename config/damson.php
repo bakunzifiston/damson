@@ -4,8 +4,9 @@ return [
 
     'contact' => [
         'email' => env('DAMSON_CONTACT_EMAIL', 'hello@damsonmushroom.com'),
-        'phone' => env('DAMSON_PHONE', '+1 (555) 010-2030'),
+        'phone' => env('DAMSON_PHONE', '+250 785 171 213'),
         'address' => env('DAMSON_ADDRESS', 'DAMSON Mushroom Farm Ltd — Innovation Campus, Agricultural District'),
+        'whatsapp_url' => env('DAMSON_WHATSAPP_URL', 'https://wa.me/250785171213'),
     ],
 
     'social' => [
@@ -18,7 +19,7 @@ return [
     'live_chat' => [
         'enabled' => env('DAMSON_LIVE_CHAT_ENABLED', false),
         'hours' => 'Mon–Sat, 8:00–18:00 (local time)',
-        'whatsapp' => env('DAMSON_WHATSAPP_URL'),
+        'whatsapp' => env('DAMSON_WHATSAPP_URL', 'https://wa.me/250785171213'),
     ],
 
     'stats' => [

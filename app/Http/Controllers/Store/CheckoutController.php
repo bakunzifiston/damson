@@ -9,6 +9,7 @@ use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -46,6 +47,7 @@ class CheckoutController extends Controller
             'customer_phone' => ['nullable', 'string', 'max:64'],
             'shipping_address' => ['required', 'string', 'max:2000'],
             'customer_notes' => ['nullable', 'string', 'max:2000'],
+            'payment_method' => ['required', Rule::in(Order::PAYMENT_METHODS)],
         ]);
 
         $subtotal = array_sum(array_column($lines, 'line_total'));
@@ -69,6 +71,7 @@ class CheckoutController extends Controller
                 $order = Order::query()->create([
                     'order_number' => $orderNumber,
                     'status' => Order::STATUS_PENDING,
+                    'payment_method' => $validated['payment_method'],
                     'customer_name' => $validated['customer_name'],
                     'customer_email' => $validated['customer_email'],
                     'customer_phone' => $validated['customer_phone'] ?? null,

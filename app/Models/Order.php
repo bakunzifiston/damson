@@ -17,6 +17,13 @@ class Order extends Model
 
     public const STATUS_CANCELLED = 'cancelled';
 
+    public const PAYMENT_CASH_ON_DELIVERY = 'cash_on_delivery';
+
+    /** @var list<string> */
+    public const PAYMENT_METHODS = [
+        self::PAYMENT_CASH_ON_DELIVERY,
+    ];
+
     /** @var list<string> */
     public const STATUSES = [
         self::STATUS_PENDING,
@@ -29,6 +36,7 @@ class Order extends Model
     protected $fillable = [
         'order_number',
         'status',
+        'payment_method',
         'customer_name',
         'customer_email',
         'customer_phone',
@@ -61,6 +69,14 @@ class Order extends Model
             self::STATUS_COMPLETED => 'Completed',
             self::STATUS_CANCELLED => 'Cancelled',
             default => ucfirst((string) $this->status),
+        };
+    }
+
+    public function getPaymentMethodLabelAttribute(): string
+    {
+        return match ($this->payment_method) {
+            self::PAYMENT_CASH_ON_DELIVERY => 'Cash on delivery',
+            default => ucfirst(str_replace('_', ' ', (string) $this->payment_method)),
         };
     }
 }

@@ -43,4 +43,6 @@
         {{-- ===== CALL-TO-ACTION SECTION ===== --}}
         @include('partials.home.cta')
     </div>
+
+    @include('partials.whatsapp-float')
 @endsection

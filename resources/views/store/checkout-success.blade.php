@@ -17,6 +17,8 @@
             <p class="mt-1 font-mono text-lg font-bold text-brand-950">{{ $order->order_number }}</p>
             <p class="mt-6 text-xs font-semibold uppercase tracking-wide text-stone-500">Total</p>
             <p class="mt-1 text-xl font-semibold text-damson-orange">{{ $sym }}{{ number_format((float) $order->total, 2) }}</p>
+            <p class="mt-6 text-xs font-semibold uppercase tracking-wide text-stone-500">Payment</p>
+            <p class="mt-1 text-sm text-stone-700">{{ $order->payment_method_label }}</p>
             <p class="mt-6 text-xs font-semibold uppercase tracking-wide text-stone-500">Shipping to</p>
             <p class="mt-1 text-sm text-stone-700 whitespace-pre-line">{{ $order->shipping_address }}</p>
         </div>

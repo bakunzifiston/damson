@@ -50,6 +50,8 @@
                 @if ($order->customer_phone)
                     <p class="mt-1 text-sm text-stone-600">{{ $order->customer_phone }}</p>
                 @endif
+                <h3 class="mt-6 text-xs font-semibold uppercase tracking-wide text-stone-500">Payment method</h3>
+                <p class="mt-2 text-sm text-stone-700">{{ $order->payment_method_label }}</p>
                 <h3 class="mt-6 text-xs font-semibold uppercase tracking-wide text-stone-500">Shipping address</h3>
                 <p class="mt-2 whitespace-pre-line text-sm text-stone-700">{{ $order->shipping_address }}</p>
                 @if ($order->customer_notes)

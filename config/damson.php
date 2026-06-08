@@ -2,6 +2,12 @@
 
 return [
 
+    /*
+    | Set DAMSON_PUBLIC_PREFIX=public on cPanel when assets live under /public/images/...
+    | Leave empty to auto-detect from APP_URL (non-localhost → public).
+    */
+    'public_prefix' => env('DAMSON_PUBLIC_PREFIX'),
+
     'contact' => [
         'email' => env('DAMSON_CONTACT_EMAIL', 'hello@damsonmushroom.com'),
         'phone' => env('DAMSON_PHONE', '+250 785 171 213'),

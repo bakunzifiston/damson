@@ -4,12 +4,12 @@
         <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16" data-reveal>
             {{-- Image --}}
             <div class="relative overflow-hidden rounded-3xl shadow-lg">
-                @php
-                    $overviewImageSrc = app()->environment('local')
-                        ? asset('images/dried-oyster-mushroom.png')
-                        : '/public/images/dried-oyster-mushroom.png';
-                @endphp
-                <img src="{{ $overviewImageSrc }}" alt="DAMSON mushroom products" class="aspect-[4/3] w-full object-contain bg-white p-4" loading="lazy">
+                <x-damson-img
+                    path="images/dried-oyster-mushroom.png"
+                    alt="DAMSON mushroom products"
+                    class="aspect-[4/3] w-full object-contain bg-white p-4"
+                    loading="lazy"
+                />
             </div>
 
             {{-- Text Content --}}

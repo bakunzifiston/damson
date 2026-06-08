@@ -1,14 +1,12 @@
-{{-- Hero Section — static banners; /public/ on hosting matches store product image URLs --}}
+{{-- Hero Section — static banners --}}
 @php
-    $heroSlideFiles = [
-        'images/home-banner-mushroom.png',
-        'images/african-mushroom.png',
-        'images/dried-oyster-mushroom.png',
+    use App\Support\DamsonAssets;
+
+    $heroSlides = [
+        DamsonAssets::image('images/home-banner-mushroom.png'),
+        DamsonAssets::image('images/african-mushroom.png'),
+        DamsonAssets::image('images/dried-oyster-mushroom.png'),
     ];
-    $heroSlides = array_map(
-        fn (string $path) => app()->environment('local') ? asset($path) : '/public/'.$path,
-        $heroSlideFiles
-    );
 @endphp
 
 <section class="relative flex min-h-[72vh] items-end overflow-hidden sm:min-h-[76vh] sm:items-center">

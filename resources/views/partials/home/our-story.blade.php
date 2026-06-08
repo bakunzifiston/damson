@@ -5,19 +5,14 @@
         <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {{-- Image Column --}}
             <div class="relative overflow-hidden rounded-3xl shadow-lg" data-reveal>
-                @php
-                    $storyImageSrc = app()->environment('local')
-                        ? asset('images/home-banner-mushroom.png')
-                        : '/public/images/home-banner-mushroom.png';
-                @endphp
-                <img
-                    src="{{ $storyImageSrc }}"
+                <x-damson-img
+                    path="images/home-banner-mushroom.png"
                     alt="DAMSON mushroom farm"
                     class="aspect-[4/3] w-full object-cover"
                     width="900"
                     height="675"
                     loading="lazy"
-                >
+                />
                 <div class="absolute inset-0 rounded-3xl ring-1 ring-inset ring-brand-900/10"></div>
             </div>
 

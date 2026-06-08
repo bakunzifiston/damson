@@ -5,9 +5,11 @@
             {{-- Image --}}
             <div class="relative overflow-hidden rounded-3xl shadow-lg">
                 @php
-                    $featuredImage = \App\Models\Product::whereNotNull('image_path')->first()?->image_path ?? 'products/LNInqjKmevaGh64TDEMz2pc4UbpcaL0tCJbw9fcE.jpg';
+                    $overviewImageSrc = app()->environment('local')
+                        ? asset('images/dried-oyster-mushroom.png')
+                        : '/public/images/dried-oyster-mushroom.png';
                 @endphp
-                <img src="{{ '/storage/' . $featuredImage }}" alt="DAMSON mushroom products" class="aspect-[4/3] w-full object-contain bg-white p-4" loading="lazy">
+                <img src="{{ $overviewImageSrc }}" alt="DAMSON mushroom products" class="aspect-[4/3] w-full object-contain bg-white p-4" loading="lazy">
             </div>
 
             {{-- Text Content --}}

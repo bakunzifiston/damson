@@ -10,7 +10,15 @@
 <section class="page-hero relative overflow-hidden bg-brand-950">
     <div class="absolute inset-0">
         @php
-            $heroImage = str_starts_with($image, 'products/') ? '/storage/' . $image : asset($image);
+            if (str_starts_with($image, 'products/')) {
+                $heroImage = app()->environment('local')
+                    ? '/storage/'.$image
+                    : '/public/storage/'.$image;
+            } else {
+                $heroImage = app()->environment('local')
+                    ? asset($image)
+                    : '/public/'.$image;
+            }
         @endphp
         <img src="{{ $heroImage }}" alt="" class="h-full w-full object-cover opacity-50" width="1920" height="1080" loading="lazy">
         <div class="absolute inset-0 bg-gradient-to-r from-brand-950/95 via-brand-900/88 to-brand-800/70"></div>

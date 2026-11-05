@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\BlogPost;
 use App\Models\Faq;
-use App\Models\Guide;
-use App\Models\LibraryResource;
+use App\Models\LearningItem;
 use App\Models\Product;
 use App\Models\Testimonial;
 use Illuminate\Database\Seeder;
@@ -14,8 +12,8 @@ class DamsonSeeder extends Seeder
 {
     public function run(): void
     {
-        BlogPost::query()->updateOrCreate(
-            ['slug' => 'five-ways-to-reduce-contamination'],
+        LearningItem::query()->updateOrCreate(
+            ['type' => 'article', 'slug' => 'five-ways-to-reduce-contamination'],
             [
                 'title' => 'Five ways to reduce contamination in warm climates',
                 'excerpt' => 'Practical hygiene habits that pay off in the fruiting room.',
@@ -25,8 +23,8 @@ class DamsonSeeder extends Seeder
             ]
         );
 
-        BlogPost::query()->updateOrCreate(
-            ['slug' => 'spawn-viability-windows'],
+        LearningItem::query()->updateOrCreate(
+            ['type' => 'article', 'slug' => 'spawn-viability-windows'],
             [
                 'title' => 'Understanding spawn viability windows',
                 'excerpt' => 'How we label generations and what it means for your inoculation schedule.',
@@ -36,8 +34,8 @@ class DamsonSeeder extends Seeder
             ]
         );
 
-        Guide::query()->updateOrCreate(
-            ['slug' => 'first-tube-grow'],
+        LearningItem::query()->updateOrCreate(
+            ['type' => 'guide', 'slug' => 'first-tube-grow'],
             [
                 'title' => 'Your first mushroom tube grow (beginner)',
                 'difficulty' => 'beginner',
@@ -47,8 +45,8 @@ class DamsonSeeder extends Seeder
             ]
         );
 
-        Guide::query()->updateOrCreate(
-            ['slug' => 'scaling-dmms'],
+        LearningItem::query()->updateOrCreate(
+            ['type' => 'guide', 'slug' => 'scaling-dmms'],
             [
                 'title' => 'Scaling DMMS across multiple rooms',
                 'difficulty' => 'advanced',
@@ -71,30 +69,33 @@ class DamsonSeeder extends Seeder
             );
         }
 
-        LibraryResource::query()->updateOrCreate(
-            ['title' => 'DMMS sensor placement guide (PDF placeholder)'],
+        LearningItem::query()->updateOrCreate(
+            ['type' => 'download', 'title' => 'DMMS sensor placement guide (PDF placeholder)'],
             [
+                'slug' => 'dmms-sensor-placement-guide',
                 'category' => 'DMMS',
-                'description' => 'Height, spacing, and calibration checklist.',
-                'resource_type' => 'pdf',
+                'excerpt' => 'Height, spacing, and calibration checklist.',
+                'format' => 'pdf',
                 'external_url' => 'https://example.com/dmms-sensor-placement',
             ]
         );
-        LibraryResource::query()->updateOrCreate(
-            ['title' => 'Substrate moisture targets — quick reference'],
+        LearningItem::query()->updateOrCreate(
+            ['type' => 'download', 'title' => 'Substrate moisture targets — quick reference'],
             [
+                'slug' => 'substrate-moisture-targets',
                 'category' => 'Farming methods',
-                'description' => 'One-page infographic for common species.',
-                'resource_type' => 'infographic',
+                'excerpt' => 'One-page infographic for common species.',
+                'format' => 'infographic',
                 'external_url' => 'https://example.com/moisture-reference',
             ]
         );
-        LibraryResource::query()->updateOrCreate(
-            ['title' => 'Webinar: Yield stability in variable seasons'],
+        LearningItem::query()->updateOrCreate(
+            ['type' => 'download', 'title' => 'Webinar: Yield stability in variable seasons'],
             [
+                'slug' => 'webinar-yield-stability',
                 'category' => 'Industry',
-                'description' => 'Recorded session with Q&A.',
-                'resource_type' => 'video',
+                'excerpt' => 'Recorded session with Q&A.',
+                'format' => 'video',
                 'external_url' => 'https://example.com/webinar-yield',
             ]
         );

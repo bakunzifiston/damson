@@ -33,34 +33,16 @@
 
         <form action="{{ route('store.checkout.store') }}" method="post" class="store-panel mt-8 space-y-5 p-6">
             @csrf
-            <div>
-                <label for="customer_name" class="block text-xs font-semibold uppercase tracking-wide text-stone-500">Full name</label>
-                <input id="customer_name" name="customer_name" type="text" required value="{{ old('customer_name') }}"
-                       class="mt-1 w-full rounded-xl border border-stone-200 px-3 py-2.5 text-sm shadow-sm focus:border-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-900/15">
+            <div class="grid gap-5 sm:grid-cols-2">
+                <x-field name="customer_name" label="Full name" required autocomplete="name" />
+                <x-field name="customer_email" label="Email" type="email" required autocomplete="email" />
+                <x-field name="customer_phone" label="Phone" optional autocomplete="tel" class="sm:col-span-2" />
             </div>
-            <div>
-                <label for="customer_email" class="block text-xs font-semibold uppercase tracking-wide text-stone-500">Email</label>
-                <input id="customer_email" name="customer_email" type="email" required value="{{ old('customer_email') }}"
-                       class="mt-1 w-full rounded-xl border border-stone-200 px-3 py-2.5 text-sm shadow-sm focus:border-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-900/15">
-            </div>
-            <div>
-                <label for="customer_phone" class="block text-xs font-semibold uppercase tracking-wide text-stone-500">Phone <span class="font-normal normal-case text-stone-400">(optional)</span></label>
-                <input id="customer_phone" name="customer_phone" type="text" value="{{ old('customer_phone') }}"
-                       class="mt-1 w-full rounded-xl border border-stone-200 px-3 py-2.5 text-sm shadow-sm focus:border-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-900/15">
-            </div>
-            <div>
-                <label for="shipping_address" class="block text-xs font-semibold uppercase tracking-wide text-stone-500">Shipping address</label>
-                <textarea id="shipping_address" name="shipping_address" rows="4" required
-                          class="mt-1 w-full rounded-xl border border-stone-200 px-3 py-2.5 text-sm shadow-sm focus:border-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-900/15">{{ old('shipping_address') }}</textarea>
-            </div>
-            <div>
-                <label for="customer_notes" class="block text-xs font-semibold uppercase tracking-wide text-stone-500">Order notes <span class="font-normal normal-case text-stone-400">(optional)</span></label>
-                <textarea id="customer_notes" name="customer_notes" rows="3"
-                          class="mt-1 w-full rounded-xl border border-stone-200 px-3 py-2.5 text-sm shadow-sm focus:border-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-900/15">{{ old('customer_notes') }}</textarea>
-            </div>
+            <x-field name="shipping_address" label="Shipping address" type="textarea" :rows="4" required autocomplete="street-address" />
+            <x-field name="customer_notes" label="Order notes" type="textarea" optional />
 
             <fieldset>
-                <legend class="block text-xs font-semibold uppercase tracking-wide text-stone-500">Payment method</legend>
+                <legend class="damson-label">Payment method</legend>
                 <div class="mt-3 space-y-3">
                     <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-damson-orange/40 bg-damson-orange/5 p-4 shadow-sm ring-2 ring-damson-orange/20">
                         <input
@@ -83,8 +65,8 @@
             </fieldset>
 
             <div class="flex flex-wrap gap-3 pt-2">
-                <button type="submit" class="damson-btn-accent rounded-xl px-8 py-3 text-sm font-semibold shadow-md">Place order</button>
-                <a href="{{ route('store.cart') }}" class="inline-flex items-center rounded-xl border border-stone-200 px-6 py-3 text-sm font-semibold text-stone-700 hover:border-damson-orange/40 hover:text-damson-orange">Back to cart</a>
+                <button type="submit" class="damson-btn-accent px-8">Place order</button>
+                <a href="{{ route('store.cart') }}" class="damson-btn-outline">Back to cart</a>
             </div>
         </form>
     </div>

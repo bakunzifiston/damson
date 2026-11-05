@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BlogPost;
 use App\Models\Faq;
-use App\Models\Guide;
-use App\Models\LibraryResource;
+use App\Models\LearningItem;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
@@ -22,33 +20,52 @@ class LearningController extends Controller
         return view('learning.index', compact('testimonials'));
     }
 
-    public function blogIndex()
+    /** Combined list of articles, guides and downloads with a type filter and search. */
+    public function resources(Request $request)
     {
-        $posts = BlogPost::query()
-            ->published()
-            ->orderByDesc('published_at')
-            ->orderByDesc('id')
-            ->paginate(9);
+        $type = array_key_exists($request->query('type'), LearningItem::TYPES) ? $request->query('type') : null;
 
-        return view('learning.blog.index', compact('posts'));
+        $query = LearningItem::query()->published();
+        if ($type) {
+            $query->ofType($type);
+        }
+
+        $term = trim((string) $request->query('q'));
+        if ($term !== '') {
+            $like = '%'.str_replace(['!', '%', '_'], ['!!', '!%', '!_'], mb_substr($term, 0, 100)).'%';
+            $query->where(fn ($q) => $q
+                ->whereRaw("title LIKE ? ESCAPE '!'", [$like])
+                ->orWhereRaw("excerpt LIKE ? ESCAPE '!'", [$like])
+                ->orWhereRaw("category LIKE ? ESCAPE '!'", [$like]));
+        }
+
+        match ($type) {
+            LearningItem::TYPE_GUIDE => $query->orderBy('sort_order')->orderBy('title'),
+            LearningItem::TYPE_DOWNLOAD => $query->orderBy('category')->orderBy('title'),
+            default => $query->orderByRaw('COALESCE(published_at, created_at) DESC')->orderByDesc('id'),
+        };
+
+        return view('learning.resources', [
+            'items' => $query->paginate(12)->withQueryString(),
+            'type' => $type,
+            'term' => $term,
+            'counts' => LearningItem::query()->published()->selectRaw('type, COUNT(*) as n')->groupBy('type')->pluck('n', 'type'),
+        ]);
     }
 
-    public function blogShow(BlogPost $post)
+    public function articleShow(string $slug)
     {
-        abort_unless($post->is_published && ($post->published_at === null || $post->published_at->lte(now())), 404);
+        $post = LearningItem::query()->ofType(LearningItem::TYPE_ARTICLE)->where('slug', $slug)->firstOrFail();
+        abort_unless($post->isVisible(), 404);
 
         return view('learning.blog.show', compact('post'));
     }
 
-    public function guides()
+    public function guideShow(string $slug)
     {
-        $guides = Guide::query()->orderBy('sort_order')->orderBy('title')->get();
+        $guide = LearningItem::query()->ofType(LearningItem::TYPE_GUIDE)->where('slug', $slug)->firstOrFail();
+        abort_unless($guide->isVisible(), 404);
 
-        return view('learning.guides.index', compact('guides'));
-    }
-
-    public function guideShow(Guide $guide)
-    {
         return view('learning.guides.show', compact('guide'));
     }
 
@@ -71,16 +88,5 @@ class LearningController extends Controller
             ->values();
 
         return view('learning.faqs', compact('faqs', 'categories', 'category'));
-    }
-
-    public function library()
-    {
-        $resources = LibraryResource::query()
-            ->orderBy('category')
-            ->orderBy('title')
-            ->get()
-            ->groupBy('category');
-
-        return view('learning.library', compact('resources'));
     }
 }

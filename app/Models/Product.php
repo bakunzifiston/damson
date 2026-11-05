@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use App\Support\DamsonAssets;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -24,6 +25,12 @@ class Product extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    /** Public URL of the product image, or null when none is set. */
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->image_path ? DamsonAssets::storage($this->image_path) : null;
     }
 
     public function scopeActive(Builder $query): Builder

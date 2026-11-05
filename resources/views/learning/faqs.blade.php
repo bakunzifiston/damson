@@ -3,36 +3,31 @@
 @section('title', 'FAQs')
 
 @section('content')
-    <div class="damson-page-hero">
-        <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-14">
-            <h1 class="font-display text-3xl font-semibold text-stone-900">FAQs</h1>
-            <p class="mt-2 text-sm text-stone-500">Farming and products.</p>
-            @if ($categories->isNotEmpty())
-                <div class="mt-8 flex flex-wrap gap-2">
-                    <a href="{{ route('learning.faqs') }}" class="text-sm {{ $category === null ? 'font-medium text-stone-900 underline decoration-stone-900 underline-offset-4' : 'text-stone-500 hover:text-stone-900' }}">All</a>
-                    @foreach ($categories as $cat)
-                        <span class="text-stone-300">·</span>
-                        <a href="{{ route('learning.faqs', ['category' => $cat]) }}" class="text-sm {{ $category === $cat ? 'font-medium text-stone-900 underline decoration-stone-900 underline-offset-4' : 'text-stone-500 hover:text-stone-900' }}">{{ $cat }}</a>
-                    @endforeach
-                </div>
-            @endif
-        </div>
-    </div>
-    <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-        <div class="space-y-2">
+    <x-simple-hero title="FAQs" subtitle="Quick answers about farming and our products.">
+        @if ($categories->isNotEmpty())
+            <div class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+                @foreach ($categories->prepend(null) as $cat)
+                    @php $active = ($category ?: null) === $cat; @endphp
+                    <a href="{{ $cat === null ? route('learning.faqs') : route('learning.faqs', ['category' => $cat]) }}" @if ($active) aria-current="true" @endif
+                       class="rounded-full border px-3.5 py-1.5 text-sm font-medium transition {{ $active ? 'border-brand-900 bg-brand-900 text-white' : 'border-stone-300 bg-white text-stone-700 hover:border-brand-900' }}">{{ $cat ?? 'All' }}</a>
+                @endforeach
+            </div>
+        @endif
+    </x-simple-hero>
+    <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-12">
+        <div class="space-y-3">
             @forelse ($faqs as $faq)
-                <details class="group border-b border-brand-900/10 py-4">
-                    <summary class="cursor-pointer list-none text-sm font-medium text-stone-900 flex justify-between gap-4 items-start [&::-webkit-details-marker]:hidden">
+                <details class="faq-details group rounded-xl border border-stone-200 bg-white px-5 py-4 shadow-sm">
+                    <summary class="text-[15px]">
                         {{ $faq->question }}
-                        <span class="shrink-0 text-stone-400 text-lg leading-none group-open:rotate-45 transition">+</span>
+                        <span class="shrink-0 text-xl leading-none text-stone-400 transition group-open:rotate-45" aria-hidden="true">+</span>
                     </summary>
-                    <div class="mt-3 text-sm text-stone-600 leading-relaxed pr-8">
-                        {{ $faq->answer }}
-                    </div>
+                    <div class="mt-3 whitespace-pre-line text-sm leading-relaxed text-stone-600">{{ $faq->answer }}</div>
                 </details>
             @empty
-                <p class="text-sm text-stone-500">No FAQs yet.</p>
+                <p class="rounded-xl border border-dashed border-stone-300 py-12 text-center text-sm text-stone-500">No FAQs found.</p>
             @endforelse
         </div>
+        <p class="mt-10 text-center text-sm text-stone-600">Can't find your answer? <a href="{{ route('contact') }}" class="font-medium text-brand-700 underline underline-offset-4 hover:text-damson-orange">Contact us</a>.</p>
     </div>
 @endsection

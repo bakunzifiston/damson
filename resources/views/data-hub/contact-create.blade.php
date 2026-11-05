@@ -1,45 +1,25 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Add contact message')
+@section('title', 'Add message')
 
 @section('content')
     <div class="mx-auto max-w-2xl">
-        <a href="{{ route('data-hub.module', ['module' => 'contacts']) }}" class="text-sm font-medium text-damson-orange hover:text-damson-orange-hover">← Contact messages</a>
+        <x-dash-header title="Add message" subtitle="Log an inquiry or internal note in the same inbox as the public contact form."
+                       :crumbs="[['label' => 'Messages', 'url' => route('data-hub.module', 'contacts')], ['label' => 'New']]" />
 
-        <div class="dashboard-card mt-6 p-6 sm:p-8">
-            <h1 class="font-display text-xl font-semibold text-brand-950">Add message</h1>
-            <p class="mt-2 text-sm text-stone-600">Log an inquiry or internal note in the same inbox as the public contact form.</p>
-
-            <form action="{{ route('data-hub.contacts.store') }}" method="post" class="mt-6 space-y-4">
-                @csrf
-                <div>
-                    <label class="block text-sm font-medium text-stone-700" for="name">Name</label>
-                    <input class="damson-input" type="text" name="name" id="name" value="{{ old('name') }}" required>
-                    @error('name')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-stone-700" for="email">Email</label>
-                    <input class="damson-input" type="email" name="email" id="email" value="{{ old('email') }}" required>
-                    @error('email')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-stone-700" for="phone">Phone</label>
-                    <input class="damson-input" type="text" name="phone" id="phone" value="{{ old('phone') }}">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-stone-700" for="subject">Subject</label>
-                    <input class="damson-input" type="text" name="subject" id="subject" value="{{ old('subject') }}">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-stone-700" for="message">Message</label>
-                    <textarea class="damson-input" name="message" id="message" rows="5" required>{{ old('message') }}</textarea>
-                    @error('message')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
-                </div>
-                <div class="flex flex-wrap gap-3 pt-2">
-                    <button class="damson-btn rounded-xl" type="submit">Save message</button>
-                    <a href="{{ route('data-hub.module', ['module' => 'contacts']) }}" class="damson-btn-outline rounded-xl">Cancel</a>
-                </div>
-            </form>
-        </div>
+        <form action="{{ route('data-hub.contacts.store') }}" method="post" class="dashboard-card mt-6 space-y-5 p-6 sm:p-8">
+            @csrf
+            <div class="grid gap-5 sm:grid-cols-2">
+                <x-field name="name" label="Name" required />
+                <x-field name="email" label="Email" type="email" required />
+                <x-field name="phone" label="Phone" optional />
+                <x-field name="subject" label="Subject" optional />
+            </div>
+            <x-field name="message" label="Message" type="textarea" :rows="5" required />
+            <div class="flex flex-wrap gap-3 pt-1">
+                <button class="damson-btn" type="submit">Save message</button>
+                <a href="{{ route('data-hub.module', 'contacts') }}" class="damson-btn-outline">Cancel</a>
+            </div>
+        </form>
     </div>
 @endsection

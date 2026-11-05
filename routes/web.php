@@ -2,16 +2,19 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContentAdminController;
 use App\Http\Controllers\DataHubController;
 use App\Http\Controllers\LearningController;
 use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductManageController;
 use App\Http\Controllers\PublicFormController;
+use App\Http\Controllers\ResourceAdminController;
 use App\Http\Controllers\Store\CartController;
 use App\Http\Controllers\Store\CheckoutController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\UserAdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
@@ -19,29 +22,31 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 
 Route::prefix('learning')->name('learning.')->group(function (): void {
     Route::get('/', [LearningController::class, 'index'])->name('index');
-    Route::get('/blog', [LearningController::class, 'blogIndex'])->name('blog.index');
-    Route::get('/blog/{post:slug}', [LearningController::class, 'blogShow'])->name('blog.show');
-    Route::get('/guides', [LearningController::class, 'guides'])->name('guides.index');
-    Route::get('/guides/{guide:slug}', [LearningController::class, 'guideShow'])->name('guides.show');
+    Route::get('/resources', [LearningController::class, 'resources'])->name('resources');
+    Route::get('/blog/{slug}', [LearningController::class, 'articleShow'])->name('blog.show');
+    Route::get('/guides/{slug}', [LearningController::class, 'guideShow'])->name('guides.show');
+    // Former index pages now live on the combined Resources page.
+    Route::redirect('/blog', '/learning/resources?type=article', 301)->name('blog.index');
+    Route::redirect('/guides', '/learning/resources?type=guide', 301)->name('guides.index');
+    Route::redirect('/library', '/learning/resources?type=download', 301)->name('library');
     Route::get('/faqs', [LearningController::class, 'faqs'])->name('faqs');
-    Route::get('/library', [LearningController::class, 'library'])->name('library');
 });
 
 Route::get('/success-stories', [TestimonialController::class, 'index'])->name('success-stories');
 
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:10,1')->name('contact.store');
 
 Route::prefix('forms')->name('forms.')->group(function (): void {
     Route::get('/', [PageController::class, 'formsHub'])->name('hub');
     Route::get('/purchase', [PublicFormController::class, 'purchaseForm'])->name('purchase');
-    Route::post('/purchase', [PublicFormController::class, 'purchaseStore'])->name('purchase.store');
+    Route::post('/purchase', [PublicFormController::class, 'purchaseStore'])->middleware('throttle:20,1')->name('purchase.store');
     Route::get('/sales', [PublicFormController::class, 'salesForm'])->name('sales');
-    Route::post('/sales', [PublicFormController::class, 'salesStore'])->name('sales.store');
+    Route::post('/sales', [PublicFormController::class, 'salesStore'])->middleware('throttle:20,1')->name('sales.store');
     Route::get('/dmms', [PublicFormController::class, 'dmmsForm'])->name('dmms');
-    Route::post('/dmms', [PublicFormController::class, 'dmmsStore'])->name('dmms.store');
+    Route::post('/dmms', [PublicFormController::class, 'dmmsStore'])->middleware('throttle:20,1')->name('dmms.store');
     Route::get('/incubation', [PublicFormController::class, 'incubationForm'])->name('incubation');
-    Route::post('/incubation', [PublicFormController::class, 'incubationStore'])->name('incubation.store');
+    Route::post('/incubation', [PublicFormController::class, 'incubationStore'])->middleware('throttle:20,1')->name('incubation.store');
 });
 
 Route::prefix('store')->name('store.')->group(function (): void {
@@ -75,6 +80,9 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/data-hub/module/{module}', [DataHubController::class, 'module'])
         ->name('data-hub.module')
         ->where('module', 'purchases|sales|dmms|incubation|contacts');
+    Route::get('/data-hub/module/{module}/export', [DataHubController::class, 'export'])
+        ->name('data-hub.module.export')
+        ->where('module', 'purchases|sales|dmms|incubation|contacts');
     Route::get('/data-hub/contacts/create', [DataHubController::class, 'createContact'])->name('data-hub.contacts.create');
     Route::post('/data-hub/contacts', [DataHubController::class, 'storeContact'])->name('data-hub.contacts.store');
 
@@ -94,4 +102,31 @@ Route::middleware('auth')->group(function (): void {
     Route::delete('/data-hub/products/{productId}', [ProductManageController::class, 'destroy'])
         ->whereNumber('productId')
         ->name('data-hub.products.destroy');
+
+    Route::prefix('/data-hub/resources')->name('data-hub.resources.')->group(function (): void {
+        Route::get('/', [ResourceAdminController::class, 'index'])->name('index');
+        Route::get('/create', [ResourceAdminController::class, 'create'])->name('create');
+        Route::post('/', [ResourceAdminController::class, 'store'])->name('store');
+        Route::get('/{resource:id}/edit', [ResourceAdminController::class, 'edit'])->whereNumber('resource')->name('edit');
+        Route::put('/{resource:id}', [ResourceAdminController::class, 'update'])->whereNumber('resource')->name('update');
+        Route::delete('/{resource:id}', [ResourceAdminController::class, 'destroy'])->whereNumber('resource')->name('destroy');
+    });
+
+    Route::prefix('/data-hub/faqs')->name('data-hub.content.')->group(function (): void {
+        Route::get('/', [ContentAdminController::class, 'index'])->name('index');
+        Route::get('/create', [ContentAdminController::class, 'create'])->name('create');
+        Route::post('/', [ContentAdminController::class, 'store'])->name('store');
+        Route::get('/{faq}/edit', [ContentAdminController::class, 'edit'])->whereNumber('faq')->name('edit');
+        Route::put('/{faq}', [ContentAdminController::class, 'update'])->whereNumber('faq')->name('update');
+        Route::delete('/{faq}', [ContentAdminController::class, 'destroy'])->whereNumber('faq')->name('destroy');
+    });
+
+    Route::middleware('can:manage-users')->prefix('/data-hub/users')->name('data-hub.users.')->group(function (): void {
+        Route::get('/', [UserAdminController::class, 'index'])->name('index');
+        Route::get('/create', [UserAdminController::class, 'create'])->name('create');
+        Route::post('/', [UserAdminController::class, 'store'])->name('store');
+        Route::get('/{user}/edit', [UserAdminController::class, 'edit'])->whereNumber('user')->name('edit');
+        Route::put('/{user}', [UserAdminController::class, 'update'])->whereNumber('user')->name('update');
+        Route::delete('/{user}', [UserAdminController::class, 'destroy'])->whereNumber('user')->name('destroy');
+    });
 });

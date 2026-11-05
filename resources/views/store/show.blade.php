@@ -8,7 +8,7 @@
         <div class="mt-8 grid gap-10 lg:grid-cols-2">
             <div class="aspect-square bg-brand-100/50">
                 @if ($product->image_path)
-                    <img src="{{ '/public/storage/'.$product->image_path }}" alt="" class="h-full w-full object-cover">
+                    <img src="{{ $product->image_url }}" alt="" class="h-full w-full object-cover">
                 @else
                     <div class="flex h-full items-center justify-center text-sm text-stone-400">No image</div>
                 @endif
@@ -20,7 +20,7 @@
                 <p class="mt-4 text-xl text-stone-900">{{ config('app.currency_symbol', '$') }}{{ number_format($product->price, 2) }} <span class="text-sm font-normal text-stone-500">/ {{ $product->unit }}</span></p>
                 <p class="mt-1 text-sm text-stone-500">Stock {{ number_format($product->stock) }}</p>
                 <div class="damson-markdown mt-6 text-sm text-stone-600">
-                    {!! Str::markdown($product->description) !!}
+                    {!! Str::markdown($product->description, ['html_input' => 'strip', 'allow_unsafe_links' => false]) !!}
                 </div>
                 @if ($product->stock > 0)
                     <form action="{{ route('store.cart.add') }}" method="post" class="mt-8 flex flex-wrap items-end gap-3">

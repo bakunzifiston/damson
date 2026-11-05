@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Concerns\FiltersLists;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,15 +12,34 @@ use Illuminate\View\View;
 
 class ProductManageController extends Controller
 {
-    public function index(): View
-    {
-        $products = Product::query()
-            ->orderBy('category')
-            ->orderBy('name')
-            ->paginate(20)
-            ->withQueryString();
+    use FiltersLists;
 
-        return view('data-hub.products.index', compact('products'));
+    public function index(Request $request): View
+    {
+        $query = Product::query();
+
+        $this->applySearch($query, $request->query('q'), ['name', 'sku', 'category']);
+        if (is_string($request->query('category')) && $request->query('category') !== '') {
+            $query->where('category', $request->query('category'));
+        }
+        if ($request->query('visibility') === 'visible') {
+            $query->where('is_active', true);
+        } elseif ($request->query('visibility') === 'hidden') {
+            $query->where('is_active', false);
+        }
+        if ($request->boolean('low_stock')) {
+            $query->where('stock', '<=', DataHubController::LOW_STOCK_THRESHOLD);
+        }
+
+        [$sort, $dir] = $this->applySort($query, $request, ['name', 'sku', 'category', 'price', 'stock'], 'category', 'asc', 'name');
+
+        return view('data-hub.products.index', [
+            'products' => $query->paginate(20)->withQueryString(),
+            'categories' => Product::query()->distinct()->orderBy('category')->pluck('category'),
+            'lowStockThreshold' => DataHubController::LOW_STOCK_THRESHOLD,
+            'sort' => $sort,
+            'dir' => $dir,
+        ]);
     }
 
     public function create(): View

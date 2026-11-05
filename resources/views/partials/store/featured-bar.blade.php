@@ -8,7 +8,7 @@
                 <li>
                     <a href="{{ route('store.show', $product) }}" class="landing-card flex items-center gap-4 p-4 transition hover:border-damson-orange/40">
                         @if ($product->image_path)
-                            <img src="{{ '/public/storage/'.$product->image_path }}" alt="" class="h-16 w-16 shrink-0 rounded-lg object-cover">
+                            <img src="{{ $product->image_url }}" alt="" class="h-16 w-16 shrink-0 rounded-lg object-cover">
                         @endif
                         <div class="min-w-0">
                             <p class="truncate text-sm font-semibold text-brand-950">{{ $product->name }}</p>

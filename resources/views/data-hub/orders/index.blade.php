@@ -8,61 +8,63 @@
 
 @section('content')
     <div class="mx-auto max-w-6xl">
-        <div>
-            <p class="text-sm font-medium text-stone-500">
-                <a href="{{ route('data-hub.index') }}" class="text-damson-orange hover:text-damson-orange-hover">Overview</a>
-                <span class="text-stone-300">/</span>
-                Orders
-            </p>
-            <h1 class="mt-1 font-display text-2xl font-semibold tracking-tight text-brand-950 sm:text-3xl">Store orders</h1>
-            <p class="mt-2 max-w-2xl text-sm text-stone-600">Orders placed through the public store. Update status as you pack and ship.</p>
-        </div>
+        <x-dash-header title="Store orders" subtitle="Orders placed through the public store. Update status as you pack and ship." :crumbs="[['label' => 'Orders']]" />
 
-        <div class="dashboard-card mt-8 overflow-hidden">
+        <div class="dashboard-card mt-6 overflow-hidden">
+            <x-list-toolbar placeholder="Search order no., name or email…">
+                <div>
+                    <label for="status" class="sr-only">Status</label>
+                    <select id="status" name="status" class="damson-input !mt-0">
+                        <option value="">All statuses</option>
+                        @foreach ($statuses as $st)
+                            <option value="{{ $st }}" @selected(request('status') === $st)>{{ ucfirst($st) }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </x-list-toolbar>
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-stone-100 text-sm">
-                    <thead class="bg-brand-50/90">
+                <table class="data-table">
+                    <thead>
                         <tr>
-                            <th scope="col" class="px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-wide text-stone-600">Order</th>
-                            <th scope="col" class="px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-wide text-stone-600">Customer</th>
-                            <th scope="col" class="px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-wide text-stone-600">Email</th>
-                            <th scope="col" class="px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-wide text-stone-600">Date</th>
-                            <th scope="col" class="px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-wide text-stone-600">Status</th>
-                            <th scope="col" class="px-4 py-3 text-right text-[11px] font-semibold uppercase tracking-wide text-stone-600">Items</th>
-                            <th scope="col" class="px-4 py-3 text-right text-[11px] font-semibold uppercase tracking-wide text-stone-600">Total</th>
-                            <th scope="col" class="px-4 py-3 text-right text-[11px] font-semibold uppercase tracking-wide text-stone-600"></th>
+                            <x-sort-th column="order_number" label="Order" :sort="$sort" :dir="$dir" />
+                            <th scope="col">Customer</th>
+                            <x-sort-th column="created_at" label="Date" :sort="$sort" :dir="$dir" />
+                            <x-sort-th column="status" label="Status" :sort="$sort" :dir="$dir" />
+                            <th scope="col" class="is-right">Items</th>
+                            <x-sort-th column="total" label="Total" :sort="$sort" :dir="$dir" right />
+                            <th scope="col"><span class="sr-only">Actions</span></th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-stone-100 bg-white">
+                    <tbody>
                         @forelse ($orders as $order)
-                            <tr class="hover:bg-brand-50/40">
-                                <td class="whitespace-nowrap px-4 py-2 font-mono text-xs font-semibold text-brand-950">{{ $order->order_number }}</td>
-                                <td class="max-w-[10rem] truncate px-4 py-2 font-medium text-stone-900">{{ $order->customer_name }}</td>
-                                <td class="max-w-[12rem] truncate px-4 py-2 text-stone-600">{{ $order->customer_email }}</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-stone-600">{{ $order->created_at->format('M j, Y g:i a') }}</td>
-                                <td class="whitespace-nowrap px-4 py-2">
-                                    <span class="inline-flex rounded-full bg-brand-100 px-2 py-0.5 text-xs font-medium text-brand-900">{{ $order->status_label }}</span>
+                            <tr>
+                                <td class="whitespace-nowrap font-mono text-xs font-semibold text-brand-950">{{ $order->order_number }}</td>
+                                <td class="max-w-[16rem]">
+                                    <p class="truncate font-medium text-stone-900">{{ $order->customer_name }}</p>
+                                    <p class="truncate text-xs text-stone-500">{{ $order->customer_email }}</p>
                                 </td>
-                                <td class="whitespace-nowrap px-4 py-2 text-right text-stone-700">{{ number_format($order->items_count) }}</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-right font-medium text-stone-900">{{ $sym }}{{ number_format((float) $order->total, 2) }}</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-right">
-                                    <a href="{{ route('data-hub.orders.show', $order) }}" class="text-sm font-semibold text-damson-orange hover:text-damson-orange-hover">View</a>
+                                <td class="whitespace-nowrap text-stone-600">{{ $order->created_at->format('M j, Y g:i a') }}</td>
+                                <td class="whitespace-nowrap"><x-status-badge :status="$order->status" :label="$order->status_label" /></td>
+                                <td class="is-right tabular-nums">{{ number_format($order->items_count) }}</td>
+                                <td class="is-right whitespace-nowrap font-medium tabular-nums text-stone-900">{{ $sym }}{{ number_format((float) $order->total, 2) }}</td>
+                                <td class="whitespace-nowrap text-right">
+                                    <a href="{{ route('data-hub.orders.show', $order) }}" class="damson-btn-outline damson-btn-sm">View<span class="sr-only"> order {{ $order->order_number }}</span></a>
                                 </td>
                             </tr>
                         @empty
-                            <tr>
-                                <td colspan="8" class="px-4 py-16 text-center text-sm text-stone-500">
-                                    No store orders yet. When customers check out, they will appear here.
-                                </td>
-                            </tr>
+                            <tr><td colspan="7">
+                                @if (request()->hasAny(['q', 'status']))
+                                    <x-empty-state title="No matching orders" text="Try a different search or reset the filters." />
+                                @else
+                                    <x-empty-state title="No store orders yet" text="When customers check out, they will appear here." />
+                                @endif
+                            </td></tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
             @if ($orders->hasPages())
-                <div class="border-t border-stone-100 bg-stone-50/80 px-4 py-3">
-                    {{ $orders->links() }}
-                </div>
+                <div class="border-t border-stone-200 bg-stone-50 px-4 py-3">{{ $orders->links() }}</div>
             @endif
         </div>
     </div>

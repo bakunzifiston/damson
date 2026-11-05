@@ -4,34 +4,44 @@
 
 @section('content')
     <div class="mx-auto max-w-6xl">
-        <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-                <p class="text-sm font-medium text-stone-500">
-                    <a href="{{ route('data-hub.index') }}" class="text-damson-orange hover:text-damson-orange-hover">Overview</a>
-                    <span class="text-stone-300">/</span>
-                    Module
-                </p>
-                <h1 class="mt-1 font-display text-2xl font-semibold tracking-tight text-brand-950 sm:text-3xl">{{ $meta['title'] }}</h1>
-                <p class="mt-2 max-w-2xl text-sm text-stone-600">{{ $meta['subtitle'] }}</p>
-            </div>
-            <a href="{{ route($meta['add_route']) }}" class="damson-btn-accent shrink-0 rounded-xl px-6 shadow-md">{{ $meta['add_label'] }}</a>
-        </div>
+        <x-dash-header :title="$meta['title']" :subtitle="$meta['subtitle']" :crumbs="[['label' => $meta['title']]]">
+            <x-slot:actions>
+                <a href="{{ route($meta['add_route']) }}" class="damson-btn-accent">{{ $meta['add_label'] }}</a>
+            </x-slot:actions>
+        </x-dash-header>
 
-        <div class="dashboard-card mt-8 overflow-hidden">
+        <div class="dashboard-card mt-6 overflow-hidden">
+            <x-list-toolbar placeholder="Search {{ strtolower($meta['title']) }}…" :export-url="route('data-hub.module.export', ['module' => $module] + request()->only(['q', 'payment_status', 'alerts', 'sort', 'dir']))">
+                @if ($module === 'sales')
+                    <div>
+                        <label for="payment_status" class="sr-only">Payment status</label>
+                        <select id="payment_status" name="payment_status" class="damson-input !mt-0">
+                            <option value="">All payments</option>
+                            @foreach (['pending' => 'Pending', 'partial' => 'Partial', 'paid' => 'Paid'] as $v => $l)
+                                <option value="{{ $v }}" @selected(request('payment_status') === $v)>{{ $l }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
+                @if ($module === 'dmms')
+                    <label class="flex items-center gap-2 text-sm text-stone-700">
+                        <input type="checkbox" name="alerts" value="1" class="h-4 w-4 rounded border-stone-300" @checked(request()->boolean('alerts'))>
+                        Only readings with alerts
+                    </label>
+                @endif
+            </x-list-toolbar>
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-stone-100 text-sm">
-                    <thead class="bg-brand-50/90">
+                <table class="data-table">
+                    <thead>
                         <tr>
                             @foreach ($meta['columns'] as $col)
-                                <th scope="col" class="whitespace-nowrap px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-wide text-stone-600">
-                                    {{ str_replace('_', ' ', $col) }}
-                                </th>
+                                <x-sort-th :column="$col" :label="str_replace('_', ' ', $col)" :sort="$sort" :dir="$dir" :right="$col === 'amount'" />
                             @endforeach
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-stone-100 bg-white">
+                    <tbody>
                         @forelse ($rows as $row)
-                            <tr class="hover:bg-brand-50/40">
+                            <tr>
                                 @foreach ($meta['columns'] as $col)
                                     @php
                                         $val = data_get($row, $col);
@@ -45,13 +55,23 @@
                                             $val = number_format((float) $val, 2);
                                         }
                                     @endphp
-                                    <td class="max-w-xs truncate px-4 py-2.5 text-stone-700">{{ $val ?? '—' }}</td>
+                                    <td class="max-w-xs truncate {{ $col === 'amount' ? 'is-right tabular-nums' : '' }}" @if (is_string($val) && strlen($val) > 30) title="{{ $val }}" @endif>
+                                        @if ($col === 'payment_status' && $val)
+                                            <x-status-badge :status="$val" />
+                                        @else
+                                            {{ $val ?? '—' }}
+                                        @endif
+                                    </td>
                                 @endforeach
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="{{ count($meta['columns']) }}" class="px-4 py-16 text-center text-sm text-stone-500">
-                                    No records yet. Use <strong class="text-brand-950">{{ $meta['add_label'] }}</strong> to create one.
+                                <td colspan="{{ count($meta['columns']) }}">
+                                    @if (request()->hasAny(['q', 'payment_status', 'alerts']))
+                                        <x-empty-state title="No matching records" text="Try a different search or reset the filters." />
+                                    @else
+                                        <x-empty-state title="No records yet" text="Use the button above to create the first one." />
+                                    @endif
                                 </td>
                             </tr>
                         @endforelse
@@ -59,9 +79,7 @@
                 </table>
             </div>
             @if ($rows->hasPages())
-                <div class="border-t border-stone-100 bg-stone-50/80 px-4 py-3">
-                    {{ $rows->links() }}
-                </div>
+                <div class="border-t border-stone-200 bg-stone-50 px-4 py-3">{{ $rows->links() }}</div>
             @endif
         </div>
     </div>

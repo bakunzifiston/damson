@@ -25,7 +25,7 @@
                             <a href="{{ route('store.show', $product) }}" class="relative block aspect-square overflow-hidden bg-stone-100">
                                 @if ($product->image_path)
                                     <img
-                                        src="{{ '/public/storage/'.$product->image_path }}"
+                                        src="{{ $product->image_url }}"
                                         alt="{{ $product->name }}"
                                         class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                                         width="400"

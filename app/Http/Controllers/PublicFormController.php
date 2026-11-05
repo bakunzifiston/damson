@@ -55,7 +55,7 @@ class PublicFormController extends Controller
             'email' => ['nullable', 'email', 'max:255'],
             'product_line' => ['required', 'string', 'max:255'],
             'amount' => ['nullable', 'numeric', 'min:0'],
-            'payment_status' => ['nullable', 'string', 'max:32'],
+            'payment_status' => ['nullable', 'in:pending,partial,paid'],
             'notes' => ['nullable', 'string', 'max:2000'],
         ]);
 

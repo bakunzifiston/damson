@@ -61,10 +61,10 @@
             </div>
             <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                 @foreach ([
-                    ['title' => 'Blog & insights', 'meta' => 'Articles · All levels', 'route' => route('learning.blog.index'), 'image' => 'images/african-mushroom.png'],
-                    ['title' => 'Step-by-step guides', 'meta' => 'Self-paced · Practical', 'route' => route('learning.guides.index'), 'image' => 'images/home-banner-mushroom.png'],
+                    ['title' => 'Blog & insights', 'meta' => 'Articles · All levels', 'route' => route('learning.resources', ['type' => 'article']), 'image' => 'images/african-mushroom.png'],
+                    ['title' => 'Step-by-step guides', 'meta' => 'Self-paced · Practical', 'route' => route('learning.resources', ['type' => 'guide']), 'image' => 'images/home-banner-mushroom.png'],
                     ['title' => 'FAQs', 'meta' => 'Quick answers · Support', 'route' => route('learning.faqs'), 'image' => 'images/dried-oyster-mushroom.png'],
-                    ['title' => 'Resource library', 'meta' => 'Documents · Downloads', 'route' => route('learning.library'), 'image' => 'images/african-mushroom.png'],
+                    ['title' => 'Resource library', 'meta' => 'Documents · Downloads', 'route' => route('learning.resources', ['type' => 'download']), 'image' => 'images/african-mushroom.png'],
                 ] as $course)
                     <article class="landing-product-card overflow-hidden" data-reveal>
                         <div class="aspect-[16/10] overflow-hidden bg-stone-100">
@@ -146,7 +146,7 @@
             <p class="mx-auto mt-4 max-w-xl text-brand-100/90">Join upcoming training programs and grow with DAMSON.</p>
             <div class="mt-8 flex flex-wrap justify-center gap-3">
                 <a href="{{ route('contact') }}?subject=Training%20enrollment" class="damson-btn-accent rounded-xl px-6 py-3">Contact us to enroll</a>
-                <a href="{{ route('learning.guides.index') }}" class="landing-btn-ghost rounded-xl px-6 py-3">Browse guides</a>
+                <a href="{{ route('learning.resources', ['type' => 'guide']) }}" class="landing-btn-ghost rounded-xl px-6 py-3">Browse guides</a>
             </div>
         </div>
     </section>

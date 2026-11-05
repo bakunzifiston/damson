@@ -50,29 +50,158 @@
         background-color: color-mix(in srgb, var(--color-damson-yellow) 45%, transparent);
         color: var(--color-brand-950);
     }
+    :focus-visible {
+        outline: 2px solid var(--color-damson-orange);
+        outline-offset: 2px;
+    }
+    input[type='checkbox'],
+    input[type='radio'] {
+        accent-color: var(--color-brand-900);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto !important;
+        }
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+        [data-reveal] {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
 }
 
 @layer components {
-    .damson-btn {
-        @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium transition;
-        @apply bg-brand-900 text-white shadow-sm hover:bg-brand-950 active:bg-brand-950;
+    /* ---------- Buttons ---------- */
+    .damson-btn,
+    .damson-btn-outline,
+    .damson-btn-accent,
+    .damson-btn-danger,
+    .damson-btn-ghost {
+        @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg px-4 py-2.5 text-sm font-semibold transition;
         @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-damson-orange focus-visible:ring-offset-2;
+        @apply disabled:cursor-not-allowed disabled:opacity-50;
+    }
+
+    .damson-btn {
+        @apply bg-brand-900 text-white shadow-sm hover:bg-brand-950 active:bg-brand-950;
     }
 
     .damson-btn-outline {
-        @apply inline-flex items-center justify-center rounded-lg border-2 border-brand-900 bg-damson-panel px-5 py-2.5 text-sm font-medium text-brand-900 transition;
-        @apply hover:bg-brand-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-damson-orange focus-visible:ring-offset-2;
+        @apply border border-brand-900/30 bg-white text-brand-900 hover:border-brand-900 hover:bg-brand-50;
     }
 
     .damson-btn-accent {
-        @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition;
         @apply bg-damson-orange text-white shadow-sm hover:bg-damson-orange-hover;
-        @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-damson-yellow focus-visible:ring-offset-2;
     }
 
+    .damson-btn-danger {
+        @apply border border-red-200 bg-white text-red-700 hover:border-red-300 hover:bg-red-50;
+    }
+
+    .damson-btn-ghost {
+        @apply text-stone-600 hover:bg-stone-100 hover:text-stone-900;
+    }
+
+    .damson-btn-sm {
+        @apply px-3 py-1.5 text-xs;
+    }
+
+    /* ---------- Forms ---------- */
     .damson-input {
-        @apply mt-1 w-full rounded-lg border-brand-200/80 bg-damson-panel shadow-sm transition;
-        @apply focus:border-brand-900 focus:ring-2 focus:ring-brand-900/15 focus:outline-none;
+        @apply mt-1 block w-full rounded-lg border border-stone-300 bg-white px-3.5 py-2.5 text-sm text-stone-900 shadow-sm transition;
+        @apply placeholder:text-stone-400;
+        @apply focus:border-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-900/15;
+        @apply disabled:cursor-not-allowed disabled:bg-stone-50 disabled:text-stone-500;
+    }
+
+    .damson-input[aria-invalid='true'] {
+        @apply border-red-400 focus:border-red-500 focus:ring-red-500/15;
+    }
+
+    .damson-label {
+        @apply block text-sm font-medium text-stone-700;
+    }
+
+    .damson-help {
+        @apply mt-1.5 text-xs text-stone-500;
+    }
+
+    .damson-error {
+        @apply mt-1.5 text-sm text-red-600;
+    }
+
+    /* ---------- Badges ---------- */
+    .badge {
+        @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium;
+    }
+    .badge-neutral { @apply bg-stone-100 text-stone-700; }
+    .badge-success { @apply bg-emerald-50 text-emerald-800 ring-1 ring-inset ring-emerald-600/15; }
+    .badge-warning { @apply bg-amber-50 text-amber-800 ring-1 ring-inset ring-amber-600/20; }
+    .badge-info { @apply bg-sky-50 text-sky-800 ring-1 ring-inset ring-sky-600/15; }
+    .badge-danger { @apply bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/15; }
+
+    /* ---------- Dashboard ---------- */
+    .dashboard-canvas {
+        @apply min-h-screen bg-stone-50;
+    }
+
+    .dashboard-card {
+        @apply rounded-xl border border-stone-200 bg-white shadow-sm;
+    }
+
+    .dash-title {
+        @apply font-display text-2xl font-semibold tracking-tight text-brand-950 sm:text-3xl;
+    }
+
+    .dash-nav-link {
+        @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-brand-100/80 transition;
+        @apply hover:bg-white/10 hover:text-white;
+    }
+
+    .dash-nav-link[aria-current='page'] {
+        @apply bg-white/12 text-white;
+    }
+
+    .dash-nav-label {
+        @apply px-3 text-[11px] font-semibold uppercase tracking-wider text-white/45;
+    }
+
+    .data-table {
+        @apply min-w-full divide-y divide-stone-200 text-sm;
+    }
+    .data-table thead {
+        @apply bg-stone-50;
+    }
+    .data-table th {
+        @apply whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-stone-500;
+    }
+    .data-table th.is-right,
+    .data-table td.is-right {
+        @apply text-right;
+    }
+    .data-table tbody {
+        @apply divide-y divide-stone-100 bg-white;
+    }
+    .data-table td {
+        @apply px-4 py-3 text-stone-700;
+    }
+    .data-table tbody tr {
+        @apply transition-colors hover:bg-stone-50/80;
+    }
+
+    .stat-link {
+        @apply block rounded-xl border border-stone-200 bg-white p-5 shadow-sm transition hover:border-brand-300 hover:shadow-md;
+    }
+
+    /* Skip link */
+    .skip-link {
+        @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-brand-950 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white;
     }
 
     .damson-section-title {
@@ -85,15 +214,6 @@
 
     .damson-page-hero {
         @apply border-b border-brand-900/10 bg-damson-panel/55;
-    }
-
-    /* Staff dashboard (BUCHAPRO-style shell, DAMSON palette) */
-    .dashboard-canvas {
-        @apply min-h-screen bg-white;
-    }
-
-    .dashboard-card {
-        @apply rounded-2xl border border-stone-200/90 bg-white shadow-[0_2px_8px_-2px_rgba(0,68,43,0.08),0_1px_2px_rgba(0,68,43,0.04)];
     }
 
     /* Public storefront surfaces (lighter than staff dashboard cards) */

@@ -10,9 +10,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="flex min-h-screen flex-col bg-damson-page text-stone-800 antialiased font-sans text-[15px] leading-normal">
+    <a href="#main" class="skip-link">Skip to content</a>
     @include('partials.nav')
     @include('partials.flash')
-    <main class="flex-1">
+    <main id="main" class="flex-1">
         @yield('content')
     </main>
     @include('partials.footer')

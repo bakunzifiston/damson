@@ -11,7 +11,7 @@ return [
     'contact' => [
         'email' => env('DAMSON_CONTACT_EMAIL', 'hello@damsonmushroom.com'),
         'phone' => env('DAMSON_PHONE', '+250 785 171 213'),
-        'address' => env('DAMSON_ADDRESS', 'DAMSON Mushroom Farm Ltd — Innovation Campus, Agricultural District'),
+        'address' => env('DAMSON_ADDRESS', 'DAMSON Mushroom Farm Ltd Rubavu.Rugerero'),
         'whatsapp_url' => env('DAMSON_WHATSAPP_URL', 'https://wa.me/250785171213'),
     ],
 

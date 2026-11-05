@@ -193,4 +193,57 @@ class LearningContentTest extends TestCase
             $this->get($u)->assertOk();
         }
     }
+
+    public function test_downloads_appear_on_learning_page_and_open_directly(): void
+    {
+        $this->item(['type' => 'download', 'title' => 'Sensor guide', 'slug' => 'sensor', 'category' => 'DMMS', 'format' => 'pdf', 'file_path' => 'library/sensor.pdf']);
+        $this->item(['type' => 'download', 'title' => 'Webinar link', 'slug' => 'web', 'category' => 'Industry', 'format' => 'video', 'external_url' => 'https://example.com/w']);
+        $this->item(['type' => 'download', 'title' => 'Empty one', 'slug' => 'empty', 'category' => 'X', 'format' => 'pdf']);
+        $this->item(['type' => 'download', 'title' => 'Draft file', 'slug' => 'draft', 'category' => 'X', 'format' => 'pdf', 'file_path' => 'library/d.pdf', 'is_published' => false]);
+
+        $html = $this->get('/learning')->assertOk()->assertSee('Downloads &amp; documents', false)
+            ->assertSee('Sensor guide')->assertSee('Webinar link')->assertDontSee('Draft file')->getContent();
+
+        // the card is a single link that opens the file / URL in a new tab, and is not forced to download
+        $this->assertMatchesRegularExpression('#<a href="[^"]*library/sensor\.pdf" target="_blank" rel="noopener noreferrer"#', $html);
+        $this->assertStringContainsString('<a href="https://example.com/w" target="_blank"', $html);
+        $this->assertDoesNotMatchRegularExpression('/<a [^>]*\\sdownload[\\s>=]/', $html);
+        $this->assertStringContainsString('Not available yet', $html);
+
+        $this->get('/learning/resources?type=download')->assertOk()->assertSee('Open document');
+    }
+
+    public function test_learning_page_hides_downloads_section_when_there_are_none(): void
+    {
+        $this->get('/learning')->assertOk()->assertDontSee('Downloads &amp; documents', false);
+    }
+
+    public function test_download_category_tabs_filter_the_resources_page(): void
+    {
+        $this->item(['type' => 'download', 'title' => 'Sensor guide', 'slug' => 'a', 'category' => 'DMMS', 'format' => 'pdf', 'external_url' => 'https://example.com/a']);
+        $this->item(['type' => 'download', 'title' => 'Moisture sheet', 'slug' => 'b', 'category' => 'Farming', 'format' => 'pdf', 'external_url' => 'https://example.com/b']);
+        $this->item(['type' => 'download', 'title' => 'Draft only', 'slug' => 'c', 'category' => 'Secret', 'format' => 'pdf', 'is_published' => false]);
+        $this->item(['type' => 'guide', 'title' => 'A guide', 'slug' => 'g', 'category' => 'DMMS', 'difficulty' => 'beginner']);
+
+        // tabs appear on the Downloads view only, with published categories (no draft-only categories)
+        $this->get('/learning/resources?type=download')->assertOk()->assertSee('Filter by category')->assertSee('DMMS')->assertSee('Farming')->assertDontSee('Secret');
+        $this->get('/learning/resources')->assertDontSee('Filter by category');
+        $this->get('/learning/resources?type=guide')->assertDontSee('Filter by category');
+
+        $this->get('/learning/resources?type=download&category=DMMS')->assertSee('Sensor guide')->assertDontSee('Moisture sheet');
+        // unknown / draft-only categories are ignored rather than returning an empty page
+        $this->get('/learning/resources?type=download&category=Secret')->assertSee('Sensor guide')->assertSee('Moisture sheet');
+        // category + search combine
+        $this->get('/learning/resources?type=download&category=Farming&q=sensor')->assertDontSee('Sensor guide')->assertDontSee('Moisture sheet');
+    }
+
+    public function test_landing_page_shows_category_tabs_for_downloads(): void
+    {
+        $this->item(['type' => 'download', 'title' => 'Sensor guide', 'slug' => 'a', 'category' => 'DMMS', 'format' => 'pdf', 'external_url' => 'https://example.com/a']);
+        $this->get('/learning')->assertOk()->assertDontSee('data-category-tabs', false);   // a single category needs no tabs
+
+        $this->item(['type' => 'download', 'title' => 'Moisture sheet', 'slug' => 'b', 'category' => 'Farming', 'format' => 'pdf', 'external_url' => 'https://example.com/b']);
+        $this->get('/learning')->assertOk()->assertSee('data-category-tabs', false)->assertSee('data-category="Farming"', false)
+            ->assertSee('/learning/resources?type=download&amp;category=DMMS', false);
+    }
 }

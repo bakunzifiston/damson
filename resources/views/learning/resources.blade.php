@@ -20,11 +20,17 @@
             </div>
             <form method="get" action="{{ route('learning.resources') }}" role="search" class="flex gap-2">
                 @if ($type)<input type="hidden" name="type" value="{{ $type }}">@endif
+                @if ($category)<input type="hidden" name="category" value="{{ $category }}">@endif
                 <label for="q" class="sr-only">Search resources</label>
                 <input id="q" type="search" name="q" value="{{ $term }}" placeholder="Search…" maxlength="100" class="damson-input !mt-0 sm:w-56">
                 <button type="submit" class="damson-btn">Search</button>
             </form>
         </div>
+        @if ($type === 'download' && $downloadCategories->isNotEmpty())
+            <div class="mt-4 border-t border-stone-200 pt-4">
+                <x-learning.category-tabs :categories="$downloadCategories" :active="$category" />
+            </div>
+        @endif
     </x-simple-hero>
 
     <div class="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
@@ -32,24 +38,7 @@
             @forelse ($items as $item)
                 <li>
                     @if ($item->type === 'download')
-                        <div class="flex h-full flex-col rounded-xl border border-stone-200 bg-white p-6 shadow-sm">
-                            <div class="flex flex-wrap items-center gap-2">
-                                <span class="badge badge-info">Download</span>
-                                @if ($item->format)<span class="badge badge-neutral">{{ ucfirst($item->format) }}</span>@endif
-                            </div>
-                            <h2 class="mt-3 font-display text-lg font-semibold text-brand-950">{{ $item->title }}</h2>
-                            @if ($item->category)<p class="mt-1 text-xs font-medium uppercase tracking-wide text-stone-500">{{ $item->category }}</p>@endif
-                            @if ($item->excerpt)<p class="mt-2 flex-1 text-sm text-stone-600">{{ $item->excerpt }}</p>@else<div class="flex-1"></div>@endif
-                            <div class="mt-4">
-                                @if ($item->external_url)
-                                    <a href="{{ $item->external_url }}" class="damson-btn-outline damson-btn-sm" rel="noopener noreferrer" target="_blank">Open<span class="sr-only"> {{ $item->title }} (new tab)</span></a>
-                                @elseif ($item->file_url)
-                                    <a href="{{ $item->file_url }}" class="damson-btn-outline damson-btn-sm" download>Download<span class="sr-only"> {{ $item->title }}</span></a>
-                                @else
-                                    <span class="text-xs text-stone-400">Not available yet</span>
-                                @endif
-                            </div>
-                        </div>
+                        <x-learning.download-card :item="$item" />
                     @else
                         @php $isGuide = $item->type === 'guide'; @endphp
                         <a href="{{ $isGuide ? route('learning.guides.show', $item) : route('learning.blog.show', $item) }}" class="group flex h-full flex-col rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-md">

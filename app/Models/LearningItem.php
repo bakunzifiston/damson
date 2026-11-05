@@ -70,6 +70,12 @@ class LearningItem extends Model
         return $this->file_path ? DamsonAssets::storage($this->file_path) : null;
     }
 
+    /** Where a download opens: an external link wins over an uploaded file. */
+    public function getOpenUrlAttribute(): ?string
+    {
+        return $this->external_url ?: $this->file_url;
+    }
+
     public function isVisible(): bool
     {
         return $this->is_published && ($this->published_at === null || $this->published_at->lte(now()));

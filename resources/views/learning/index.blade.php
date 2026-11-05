@@ -14,6 +14,30 @@
         ],
     ])
 
+    @if ($downloads->isNotEmpty())
+        <section class="page-section page-section-alt" aria-labelledby="downloads-title">
+            <div class="page-shell">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between" data-reveal>
+                    <div>
+                        <p class="landing-eyebrow">Free resources</p>
+                        <h2 id="downloads-title" class="damson-section-title mt-3">Downloads &amp; documents</h2>
+                        <p class="mt-2 max-w-xl text-sm text-stone-600">Guides, checklists and references. Click a document to open it right away.</p>
+                    </div>
+                    <a href="{{ route('learning.resources', ['type' => 'download']) }}" class="damson-btn-outline shrink-0">View all downloads</a>
+                </div>
+                @php $downloadCategories = $downloads->whereNotNull('category')->countBy('category')->sortKeys(); @endphp
+                @if ($downloadCategories->count() > 1)
+                    <div class="mt-6"><x-learning.category-tabs :categories="$downloadCategories" filterable /></div>
+                @endif
+                <ul class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-category-list>
+                    @foreach ($downloads as $item)
+                        <li data-reveal data-category="{{ $item->category }}"><x-learning.download-card :item="$item" /></li>
+                    @endforeach
+                </ul>
+            </div>
+        </section>
+    @endif
+
     <section class="page-section bg-white">
         <div class="page-shell">
             <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between" data-reveal>

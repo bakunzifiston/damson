@@ -17,7 +17,11 @@ class LearningController extends Controller
             ->limit(3)
             ->get();
 
-        return view('learning.index', compact('testimonials'));
+        $downloads = LearningItem::query()->published()->ofType(LearningItem::TYPE_DOWNLOAD)
+            ->orderByRaw('COALESCE(published_at, created_at) DESC')->orderByDesc('id')
+            ->limit(12)->get();
+
+        return view('learning.index', compact('testimonials', 'downloads'));
     }
 
     /** Combined list of articles, guides and downloads with a type filter and search. */
@@ -28,6 +32,17 @@ class LearningController extends Controller
         $query = LearningItem::query()->published();
         if ($type) {
             $query->ofType($type);
+        }
+
+        // Category tabs apply to downloads only.
+        $downloadCategories = LearningItem::query()->published()->ofType(LearningItem::TYPE_DOWNLOAD)
+            ->whereNotNull('category')->selectRaw('category, COUNT(*) as n')->groupBy('category')->orderBy('category')
+            ->pluck('n', 'category');
+        $category = $type === LearningItem::TYPE_DOWNLOAD && $downloadCategories->has($request->query('category'))
+            ? (string) $request->query('category')
+            : null;
+        if ($category !== null) {
+            $query->where('category', $category);
         }
 
         $term = trim((string) $request->query('q'));
@@ -49,6 +64,8 @@ class LearningController extends Controller
             'items' => $query->paginate(12)->withQueryString(),
             'type' => $type,
             'term' => $term,
+            'category' => $category,
+            'downloadCategories' => $downloadCategories,
             'counts' => LearningItem::query()->published()->selectRaw('type, COUNT(*) as n')->groupBy('type')->pluck('n', 'type'),
         ]);
     }

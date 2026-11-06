@@ -8,6 +8,7 @@
         'subtitle' => 'Practical skills, business knowledge, and continuous support for mushroom farmers at every level.',
         'eyebrow' => 'Learning hub',
         'image' => 'images/home-banner-mushroom.png',
+        'cta' => ['label' => 'Apply now', 'url' => route('learning.apply')],
         'breadcrumbs' => [
             ['label' => 'Home', 'url' => route('home')],
             ['label' => 'Learning'],
@@ -45,7 +46,7 @@
                     <p class="landing-eyebrow">Get started</p>
                     <h2 class="damson-section-title mt-2">Build your mushroom farming skills</h2>
                 </div>
-                <a href="{{ route('contact') }}?subject=Training%20enrollment" class="damson-btn-accent shrink-0 rounded-xl px-6 py-3">Enroll now</a>
+                <a href="{{ route('learning.apply') }}" class="damson-btn-accent shrink-0 rounded-xl px-6 py-3">Enroll now</a>
             </div>
         </div>
     </section>
@@ -169,7 +170,7 @@
             <h2 class="font-display text-3xl font-semibold text-white sm:text-4xl">Ready to enroll?</h2>
             <p class="mx-auto mt-4 max-w-xl text-brand-100/90">Join upcoming training programs and grow with DAMSON.</p>
             <div class="mt-8 flex flex-wrap justify-center gap-3">
-                <a href="{{ route('contact') }}?subject=Training%20enrollment" class="damson-btn-accent rounded-xl px-6 py-3">Contact us to enroll</a>
+                <a href="{{ route('learning.apply') }}" class="damson-btn-accent rounded-xl px-6 py-3">Contact us to enroll</a>
                 <a href="{{ route('learning.resources', ['type' => 'guide']) }}" class="landing-btn-ghost rounded-xl px-6 py-3">Browse guides</a>
             </div>
         </div>

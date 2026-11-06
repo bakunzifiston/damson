@@ -66,6 +66,9 @@
                 <a href="{{ route('learning.index') }}" class="landing-btn-ghost rounded-xl px-6 py-3">
                     Join Training
                 </a>
+                <a href="{{ route('learning.apply') }}" class="damson-btn-accent rounded-xl px-6 py-3">
+                    Apply Now <span aria-hidden="true">→</span>
+                </a>
             </div>
         </div>
 

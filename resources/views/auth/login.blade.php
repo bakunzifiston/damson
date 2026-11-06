@@ -19,6 +19,5 @@
             </label>
             <button class="damson-btn w-full" type="submit">Sign in</button>
         </form>
-        <p class="mt-4 text-center text-xs text-stone-500">Demo: admin@damson.test / password</p>
     </div>
 @endsection

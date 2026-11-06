@@ -2,10 +2,10 @@
 
 @php
     $variant = match ($status) {
-        'completed', 'paid' => 'success',
-        'processing', 'shipped' => 'info',
-        'pending', 'partial' => 'warning',
-        'cancelled' => 'danger',
+        'completed', 'paid', 'accepted' => 'success',
+        'processing', 'shipped', 'contacted' => 'info',
+        'pending', 'partial', 'new' => 'warning',
+        'cancelled', 'declined' => 'danger',
         default => 'neutral',
     };
 @endphp

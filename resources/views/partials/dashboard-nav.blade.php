@@ -27,6 +27,7 @@
             ['Sales', route('data-hub.module', 'sales'), 'cash', $module('sales')],
             ['DMMS', route('data-hub.module', 'dmms'), 'chart', $module('dmms')],
             ['Incubation', route('data-hub.module', 'incubation'), 'flask', $module('incubation')],
+            ['Training applications', route('data-hub.training.index'), 'book', request()->routeIs('data-hub.training.*')],
             ['Messages', route('data-hub.module', 'contacts'), 'mail', $module('contacts') || request()->routeIs('data-hub.contacts.create')],
         ],
         'Learning content' => [

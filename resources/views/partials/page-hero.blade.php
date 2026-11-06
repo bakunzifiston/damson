@@ -5,6 +5,7 @@
     'image' => 'images/home-banner-mushroom.png',
     'breadcrumbs' => [],
     'centered' => false,
+    'cta' => null,       // optional ['label' => '…', 'url' => '…'] button shown under the subtitle
 ])
 
 <section class="page-hero relative overflow-hidden bg-brand-950">
@@ -29,6 +30,11 @@
             <h1 class="mt-3 font-display text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">{{ $title }}</h1>
             @if ($subtitle)
                 <p class="mt-4 text-base leading-relaxed text-brand-100/90 sm:text-lg">{{ $subtitle }}</p>
+            @endif
+            @if ($cta)
+                <div class="mt-7 {{ $centered ? 'flex justify-center' : '' }}">
+                    <a href="{{ $cta['url'] }}" class="damson-btn-accent px-7 py-3 text-base shadow-lg">{{ $cta['label'] }} <span aria-hidden="true">→</span></a>
+                </div>
             @endif
         </div>
     </div>

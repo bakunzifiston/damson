@@ -14,6 +14,8 @@ use App\Http\Controllers\Store\CartController;
 use App\Http\Controllers\Store\CheckoutController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\TrainingApplicationAdminController;
+use App\Http\Controllers\TrainingApplicationController;
 use App\Http\Controllers\UserAdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +32,8 @@ Route::prefix('learning')->name('learning.')->group(function (): void {
     Route::redirect('/guides', '/learning/resources?type=guide', 301)->name('guides.index');
     Route::redirect('/library', '/learning/resources?type=download', 301)->name('library');
     Route::get('/faqs', [LearningController::class, 'faqs'])->name('faqs');
+    Route::get('/apply', [TrainingApplicationController::class, 'create'])->name('apply');
+    Route::post('/apply', [TrainingApplicationController::class, 'store'])->middleware('throttle:10,1')->name('apply.store');
 });
 
 Route::get('/success-stories', [TestimonialController::class, 'index'])->name('success-stories');
@@ -110,6 +114,12 @@ Route::middleware('auth')->group(function (): void {
         Route::get('/{resource:id}/edit', [ResourceAdminController::class, 'edit'])->whereNumber('resource')->name('edit');
         Route::put('/{resource:id}', [ResourceAdminController::class, 'update'])->whereNumber('resource')->name('update');
         Route::delete('/{resource:id}', [ResourceAdminController::class, 'destroy'])->whereNumber('resource')->name('destroy');
+    });
+
+    Route::prefix('/data-hub/training')->name('data-hub.training.')->group(function (): void {
+        Route::get('/', [TrainingApplicationAdminController::class, 'index'])->name('index');
+        Route::get('/{application}', [TrainingApplicationAdminController::class, 'show'])->whereNumber('application')->name('show');
+        Route::put('/{application}', [TrainingApplicationAdminController::class, 'update'])->whereNumber('application')->name('update');
     });
 
     Route::prefix('/data-hub/faqs')->name('data-hub.content.')->group(function (): void {

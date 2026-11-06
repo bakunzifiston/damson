@@ -54,3 +54,32 @@ document.querySelectorAll('[data-category-tabs]').forEach((tabs) => {
         });
     });
 });
+
+// Forms marked data-submit-once: disable the submit button and show a loading label after a valid submit,
+// so a double click cannot send the application twice. Re-enabled if the page is restored from history.
+document.querySelectorAll('form[data-submit-once]').forEach((form) => {
+    form.addEventListener('submit', (e) => {
+        if (form.dataset.submitting === '1') {
+            e.preventDefault();
+            return;
+        }
+        form.dataset.submitting = '1';
+        form.querySelectorAll('button[type="submit"]').forEach((btn) => {
+            btn.disabled = true;
+            btn.setAttribute('aria-busy', 'true');
+            btn.dataset.originalText = btn.textContent;
+            btn.textContent = btn.dataset.loadingText || 'Submitting…';
+        });
+    });
+});
+window.addEventListener('pageshow', (e) => {
+    if (!e.persisted) return;
+    document.querySelectorAll('form[data-submit-once]').forEach((form) => {
+        form.dataset.submitting = '0';
+        form.querySelectorAll('button[type="submit"]').forEach((btn) => {
+            btn.disabled = false;
+            btn.removeAttribute('aria-busy');
+            if (btn.dataset.originalText) btn.textContent = btn.dataset.originalText;
+        });
+    });
+});

@@ -20,6 +20,7 @@
             $records[] = [$statLabels[$key] ?? ucfirst($key), $n, route('data-hub.module', $key)];
         }
         array_unshift($records, ['Products', $productCount, route('data-hub.products.index')]);
+        $records[] = ['Training applications'.($trainingNew ? ' ('.$trainingNew.' new)' : ''), $trainingTotal, route('data-hub.training.index')];
 
         $maxOrders = max(1, max(array_column($series, 'orders')));
         $chartOrders = array_sum(array_column($series, 'orders'));
@@ -142,7 +143,7 @@
         {{-- Records --}}
         <section aria-labelledby="records-title">
             <h2 id="records-title" class="text-sm font-semibold uppercase tracking-wide text-stone-500">Records</h2>
-            <ul class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+            <ul class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 @foreach ($records as [$label, $n, $url])
                     <li>
                         <a href="{{ $url }}" class="stat-link group !p-4">

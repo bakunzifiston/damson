@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\PurchaseRecord;
 use App\Models\SalesRecord;
+use App\Models\TrainingApplication;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -118,6 +119,8 @@ class DataHubController extends Controller
                 'contacts' => ContactMessage::query()->count(),
             ],
             'productCount' => Product::query()->count(),
+            'trainingTotal' => TrainingApplication::query()->count(),
+            'trainingNew' => TrainingApplication::query()->where('status', 'new')->count(),
             'orderCount' => (int) $orderStats->total_orders,
             'revenue' => (float) $orderStats->revenue,
             'openOrders' => (int) $orderStats->open_orders,
